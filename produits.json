@@ -29,6 +29,7 @@
       "stock": 15,
       "nouveau": true
     },
+    
     {
       "id": "arduino-nano",
       "nom": "Arduino Nano",
@@ -58,6 +59,7 @@
       "stock": 25,
       "nouveau": false
     },
+    
     {
       "id": "nrf24l01",
       "nom": "nRF24L01+PA",
@@ -86,6 +88,7 @@
       "stock": 18,
       "nouveau": true
     },
+    
     {
       "id": "l298n",
       "nom": "Module L298N",
@@ -114,6 +117,7 @@
       "stock": 12,
       "nouveau": false
     },
+    
     {
       "id": "dht22",
       "nom": "Capteur DHT22",
@@ -143,6 +147,7 @@
       "stock": 30,
       "nouveau": true
     },
+    
     {
       "id": "relais-5v",
       "nom": "Module Relais 5V",
@@ -172,6 +177,7 @@
       "stock": 40,
       "nouveau": false
     },
+    
     {
       "id": "kit-arduino-uno",
       "nom": "Kit Arduino Uno",
@@ -201,6 +207,7 @@
       "stock": 1,
       "nouveau": true
     },
+    
     {
       "id": "controleur-temperature",
       "nom": "Contrôleur de Température",
@@ -230,6 +237,7 @@
       "stock": 5,
       "nouveau": true
     },
+    
     {
       "id": "roues-motrices",
       "nom": "Roues Motrices",
@@ -259,6 +267,7 @@
       "stock": 10,
       "nouveau": true
     },
+    
     {
       "id": "moteur-dc",
       "nom": "Moteur DC",
@@ -288,6 +297,7 @@
       "stock": 10,
       "nouveau": false
     },
+    
     {
       "id": "relais-1x",
       "nom": "Relais 1 Canal",
@@ -317,6 +327,7 @@
       "stock": 4,
       "nouveau": false
     },
+    
     {
       "id": "relais-2x",
       "nom": "Relais 2 Canaux",
@@ -346,6 +357,7 @@
       "stock": 4,
       "nouveau": true
     },
+    
     {
       "id": "relais-4x",
       "nom": "Relais 4 Canaux",
@@ -375,6 +387,7 @@
       "stock": 4,
       "nouveau": true
     },
+    
     {
       "id": "pont-h-l298n",
       "nom": "Pont en H L298N",
@@ -404,6 +417,7 @@
       "stock": 5,
       "nouveau": false
     },
+    
     {
       "id": "irfz44n",
       "nom": "MOSFET IRFZ44N",
@@ -433,6 +447,7 @@
       "stock": 30,
       "nouveau": true
     },
+    
     {
       "id": "ne555p",
       "nom": "NE555P",
@@ -462,6 +477,7 @@
       "stock": 50,
       "nouveau": false
     },
+    
     {
       "id": "capaciteur-ceramique",
       "nom": "Capaciteur Céramique",
@@ -491,6 +507,7 @@
       "stock": 300,
       "nouveau": true
     },
+    
     {
       "id": "photo-resistor",
       "nom": "Photo-Résistance",
@@ -520,6 +537,7 @@
       "stock": 60,
       "nouveau": false
     },
+    
     {
       "id": "dc-speed-controller",
       "nom": "Contrôleur Vitesse DC",
@@ -549,6 +567,7 @@
       "stock": 2,
       "nouveau": true
     },
+    
     {
       "id": "kit-sensor-arduino",
       "nom": "Kit Capteurs Arduino",
@@ -578,6 +597,7 @@
       "stock": 45,
       "nouveau": true
     },
+    
     {
       "id": "lmxx",
       "nom": "LMXX Régulateur",
@@ -607,6 +627,7 @@
       "stock": 50,
       "nouveau": false
     },
+    
     {
       "id": "contact-3-positions",
       "nom": "Contact 3 Positions",
@@ -636,6 +657,7 @@
       "stock": 5,
       "nouveau": true
     },
+    
     {
       "id": "ic-ir2113",
       "nom": "IC IR2113",
@@ -665,6 +687,7 @@
       "stock": 5,
       "nouveau": true
     },
+    
     {
       "id": "diode-in4xxx",
       "nom": "Diode IN4xxx",
@@ -694,6 +717,7 @@
       "stock": 1,
       "nouveau": false
     },
+    
     {
       "id": "resistance",
       "nom": "Résistance",
@@ -723,6 +747,7 @@
       "stock": 1,
       "nouveau": false
     },
+    
     {
       "id": "pedale",
       "nom": "Pédale",
