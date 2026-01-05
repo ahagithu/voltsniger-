@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<!-- Ce fichier contient les éléments partagés -->
-<!-- HEADER -->
+<!-- HEADER TEMPLATE -->
 <template id="site-header">
   <header class="site-header">
     <div class="container header-inner">
@@ -27,7 +24,7 @@
   </header>
 </template>
 
-<!-- FOOTER -->
+<!-- FOOTER TEMPLATE -->
 <template id="site-footer">
   <footer class="site-footer">
     <div class="container">
@@ -62,61 +59,3 @@
     </div>
   </footer>
 </template>
-
-<!-- TEMPLATE PRODUIT CARD -->
-<template id="product-card-template">
-  <div class="product-card" data-category="{category}">
-    <div class="product-badges">
-      {badges}
-    </div>
-    
-    <div class="whatsapp-badge">
-      <i class="fab fa-whatsapp"></i> Commande rapide
-    </div>
-    
-    <img src="{image}" alt="{name}" class="product-image" loading="lazy">
-    
-    <div class="product-info">
-      <span class="product-category">{categoryName}</span>
-      <h3 class="product-title">{name}</h3>
-      <p class="product-description">{description}</p>
-      
-      <div class="product-price">{price}</div>
-      
-      <div class="product-stock {stockClass}">
-        <i class="fas fa-{stockIcon}"></i> {stockText}
-      </div>
-      
-      <div class="product-actions">
-        <button class="btn btn-whatsapp-product" onclick="orderWhatsAppProduct('{id}')" {disabled}>
-          <i class="fab fa-whatsapp"></i> COMMANDER WHATSAPP
-        </button>
-        
-        <button class="btn btn-primary" onclick="addToCart('{id}')" {disabled}>
-          <i class="fas fa-cart-plus"></i> Panier
-        </button>
-        
-        <a href="produit.html?id={id}" class="btn btn-details">
-          <i class="fas fa-eye"></i> Détails
-        </a>
-      </div>
-      
-      <div class="quick-order-notice">
-        <i class="fas fa-bolt"></i> Livraison rapide sous 24h
-      </div>
-    </div>
-  </div>
-</template>
-
-<!-- MODAL DETAIL PRODUIT -->
-<template id="product-modal-template">
-  <div class="product-modal-overlay">
-    <div class="product-modal">
-      <button class="modal-close">&times;</button>
-      <div class="modal-content">
-        <!-- Contenu chargé dynamiquement -->
-      </div>
-    </div>
-  </div>
-</template>
-</html>
