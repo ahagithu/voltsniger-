@@ -15,6 +15,130 @@ var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // ===== FONCTIONS DE BASE =====
 
+// ===== FONCTIONS PANIER =====
+
+// Mettre à jour TOUS les badges panier
+function updateCartBadges() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  
+  console.log('Mise à jour badges - Articles dans panier:', totalItems, cart);
+  
+  // Mettre à jour tous les types de badges
+  const badges = document.querySelectorAll('.cart-count, .cart-badge, .cart-count-floating');
+  console.log('Badges trouvés:', badges.length);
+  
+  badges.forEach(el => {
+    el.textContent = totalItems;
+    el.style.display = totalItems > 0 ? 'flex' : 'none';
+    
+    // Animation si panier non vide
+    if (totalItems > 0) {
+      el.style.animation = 'pulse 2s infinite';
+    } else {
+      el.style.animation = 'none';
+    }
+  });
+  
+  // Mettre à jour le texte du panier si besoin
+  const cartTexts = document.querySelectorAll('.cart-text, .cart-total');
+  cartTexts.forEach(el => {
+    if (totalItems === 0) {
+      el.textContent = 'Panier vide';
+    } else if (totalItems === 1) {
+      el.textContent = '1 article';
+    } else {
+      el.textContent = `${totalItems} articles`;
+    }
+  });
+  
+  return totalItems;
+}
+
+// Fonction pour ajouter au panier (avec mise à jour des badges)
+function addToCart(productId, quantity = 1) {
+  const product = allProducts.find(p => p.id === productId);
+  if (!product) {
+    showNotification('Produit non trouvé', 'error');
+    return false;
+  }
+  
+  if (product.stock === 0) {
+    showNotification('Produit en rupture de stock', 'error');
+    return false;
+  }
+  
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(item => item.id === productId);
+  
+  if (existingItem) {
+    existingItem.quantity = (existingItem.quantity || 1) + quantity;
+  } else {
+    cart.push({
+      id: productId,
+      nom: product.nom,
+      prix: product.prix,
+      image: product.images[0],
+      quantity: quantity
+    });
+  }
+  
+  // Sauvegarder dans localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // Mettre à jour IMMÉDIATEMENT les badges
+  updateCartBadges();
+  
+  // Afficher notification
+  showNotification(`${product.nom} ajouté au panier`);
+  
+  // Forcer le re-render si nécessaire (pour React-like updates)
+  dispatchCartUpdateEvent();
+  
+  return true;
+}
+
+// Événement personnalisé pour synchroniser tous les composants
+function dispatchCartUpdateEvent() {
+  const event = new CustomEvent('cartUpdated', {
+    detail: { count: getCartItemCount() }
+  });
+  document.dispatchEvent(event);
+}
+
+// Obtenir le nombre d'articles dans le panier
+function getCartItemCount() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  return cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+}
+
+// ===== ÉCOUTEUR D'ÉVÉNEMENTS =====
+
+// Écouter les changements de panier depuis d'autres pages/onglets
+document.addEventListener('cartUpdated', function(e) {
+  console.log('Événement cartUpdated reçu:', e.detail);
+  updateCartBadges();
+});
+
+// Synchroniser entre onglets
+window.addEventListener('storage', function(e) {
+  if (e.key === 'cart') {
+    console.log('Stockage localStorage modifié, mise à jour badges');
+    updateCartBadges();
+  }
+});
+
+// ===== INITIALISATION =====
+document.addEventListener('DOMContentLoaded', function() {
+  // ... votre code existant ...
+  
+  // Initialiser les badges panier
+  updateCartBadges();
+  
+  // Debug: vérifier le contenu du panier
+  console.log('Panier initial:', JSON.parse(localStorage.getItem('cart')) || []);
+});
+
 // ===== MENU MOBILE =====
 function initMobileMenu() {
   const menuToggle = document.querySelector('.menu-toggle');
