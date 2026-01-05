@@ -421,17 +421,25 @@
   <script src="script.js"></script>
   <script>
     // Fonctions spécifiques au panier
-    let allProducts = [];
+    let panierProducts = []; // Utiliser un nom différent pour éviter le conflit
     
-    // Charger les produits
+    // Charger les produits pour le panier
     async function loadProductsForCart() {
       try {
+        console.log('Chargement des produits pour le panier...');
         const response = await fetch('produits.json');
         const data = await response.json();
-        allProducts = data.produits;
+        panierProducts = data.produits; // Utiliser panierProducts au lieu de allProducts
         displayCart();
       } catch (error) {
         console.error('Erreur de chargement des produits:', error);
+        document.getElementById('cart-items').innerHTML = `
+          <div class="error-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Erreur de chargement</h3>
+            <p>Impossible de charger les produits</p>
+          </div>
+        `;
       }
     }
     
@@ -462,7 +470,7 @@
       // Afficher les articles
       let subtotal = 0;
       container.innerHTML = cart.map((item, index) => {
-        const product = allProducts.find(p => p.id === item.id) || item;
+        const product = panierProducts.find(p => p.id === item.id) || item;
         const itemTotal = (product.prix || item.prix || 0) * (item.quantity || 1);
         subtotal += itemTotal;
         
@@ -522,7 +530,7 @@
           </div>
           
           <div class="cart-actions">
-            <button onclick="checkoutWhatsApp()" class="btn btn-primary btn-full">
+            <button onclick="checkoutCart()" class="btn btn-primary btn-full">
               <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
             </button>
             
@@ -546,9 +554,9 @@
       const item = cart[index];
       
       // Vérifier le stock
-      const product = allProducts.find(p => p.id === item.id);
+      const product = panierProducts.find(p => p.id === item.id);
       if (product && product.stock && newQuantity > product.stock) {
-        showNotification(`Stock insuffisant. Maximum: ${product.stock}`, 'error');
+        showCartNotification(`Stock insuffisant. Maximum: ${product.stock}`, 'error');
         return;
       }
       
@@ -561,7 +569,7 @@
       // Re-afficher le panier
       displayCart();
       
-      showNotification('Quantité mise à jour');
+      showCartNotification('Quantité mise à jour');
     }
     
     // Supprimer un article
@@ -578,7 +586,7 @@
       // Re-afficher le panier
       displayCart();
       
-      showNotification(`${itemName} retiré du panier`);
+      showCartNotification(`${itemName} retiré du panier`);
     }
     
     // Vider le panier
@@ -586,7 +594,7 @@
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       
       if (cart.length === 0) {
-        showNotification('Le panier est déjà vide', 'error');
+        showCartNotification('Le panier est déjà vide', 'error');
         return;
       }
       
@@ -599,16 +607,16 @@
         // Re-afficher le panier
         displayCart();
         
-        showNotification('Panier vidé');
+        showCartNotification('Panier vidé');
       }
     }
     
-    // Commander via WhatsApp
-    function checkoutWhatsApp() {
+    // Commander via WhatsApp depuis le panier
+    function checkoutCart() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       
       if (cart.length === 0) {
-        showNotification('Votre panier est vide', 'error');
+        showCartNotification('Votre panier est vide', 'error');
         return;
       }
       
@@ -617,7 +625,7 @@
       
       let subtotal = 0;
       cart.forEach((item, index) => {
-        const product = allProducts.find(p => p.id === item.id) || item;
+        const product = panierProducts.find(p => p.id === item.id) || item;
         const price = product.prix || item.prix || 0;
         const total = price * (item.quantity || 1);
         subtotal += total;
@@ -642,8 +650,8 @@
       window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     }
     
-    // Afficher une notification
-    function showNotification(message, type = 'success') {
+    // Afficher une notification (version spécifique au panier)
+    function showCartNotification(message, type = 'success') {
       const notification = document.createElement('div');
       notification.className = 'notification';
       notification.innerHTML = `
@@ -710,9 +718,7 @@
     window.updateCartItem = updateCartItem;
     window.removeFromCart = removeFromCart;
     window.clearCart = clearCart;
-    window.checkoutWhatsApp = checkoutWhatsApp;
-    window.updateCartCount = updateCartCount;
-    window.showNotification = showNotification;
+    window.checkoutCart = checkoutCart;
     
     // Ajouter des animations CSS
     const style = document.createElement('style');
