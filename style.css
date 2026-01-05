@@ -1706,3 +1706,28 @@ textarea.form-control {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* SUPPRIMER LE MESSAGE DE LIVRAISON */
+.quick-order-notice {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Supprimer aussi si dans d'autres divs */
+[class*="delivery"],
+[class*="livraison"],
+[class*="shipping"] {
+  display: none !important;
+}
+
+/* Chercher par contenu texte avec CSS (si moderne) */
+div:has(> i.fa-bolt),
+div:contains("sous 24h"),
+div:contains("Livraison rapide") {
+  display: none !important;
+}
