@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr" data-page="panier">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Panier - VoltsNiger</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cart-page {
+      padding: 40px 0;
+    }
+    
+    .cart-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    @media (max-width: 1024px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .cart-items-container,
+    .cart-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .cart-summary-container {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .cart-header h2 {
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+    
+    .empty-cart i {
+      font-size: 4rem;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+    
+    .empty-cart h3 {
+      color: #475569;
+      margin-bottom: 10px;
+    }
+    
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 2fr 1fr 1fr 50px;
+      gap: 20px;
+      align-items: center;
+      padding: 25px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    @media (max-width: 768px) {
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 15px;
+        padding: 20px 0;
+      }
+      
+      .cart-item-image {
+        grid-row: span 3;
+      }
+      
+      .cart-item-info {
+        grid-column: 2;
+      }
+      
+      .quantity-control {
+        grid-column: 2;
+        grid-row: 2;
+      }
+      
+      .cart-item-total {
+        grid-column: 2;
+        grid-row: 3;
+        text-align: left;
+      }
+      
+      .remove-btn {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: end;
+      }
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    
+    .cart-item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .cart-item-info h4 {
+      margin-bottom: 5px;
+      color: #1e293b;
+    }
+    
+    .cart-item-price {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .quantity-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #e2e8f0;
+      background: white;
+      color: #475569;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    .quantity-btn:hover {
+      border-color: #3b82f6;
+      color: #3b82f6;
+    }
+    
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      padding: 8px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    
+    .cart-item-total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #1e293b;
+      text-align: right;
+    }
+    
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .remove-btn:hover {
+      color: #ef4444;
+      background: #fee2e2;
+    }
+    
+    .cart-summary h3 {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+      color: #1e293b;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: #475569;
+    }
+    
+    .summary-row.total {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1e293b;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #e2e8f0;
+    }
+    
+    .summary-note {
+      background: #f0f9ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 0.9rem;
+      color: #0369a1;
+      text-align: center;
+    }
+    
+    .payment-methods {
+      margin: 25px 0;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+    
+    .payment-methods h4 {
+      margin-bottom: 15px;
+      color: #475569;
+      font-size: 1rem;
+    }
+    
+    .payment-icons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .payment-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+    
+    .continue-shopping {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #3b82f6;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+    
+    .continue-shopping:hover {
+      text-decoration: underline;
+    }
+    
+    .shipping-info {
+      background: #f0f9ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .shipping-info h4 {
+      color: #0369a1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .cart-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .loading-cart {
+      text-align: center;
+      padding: 40px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+      </a>
+      
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="site-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="produits.html"><i class="fas fa-shopping-bag"></i> Produits</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="panier.html" class="cart-link active">
+          <i class="fas fa-shopping-cart"></i> Panier
+          <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container cart-page">
+    <h1 class="page-title"><i class="fas fa-shopping-cart"></i> Mon Panier</h1>
+    
+    <div class="cart-container">
+      <div class="cart-items-container">
+        <div class="cart-header">
+          <h2><i class="fas fa-box"></i> Vos articles</h2>
+          <a href="produits.html" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Continuer mes achats
+          </a>
+        </div>
+        
+        <div id="cart-items">
+          <div class="loading-cart">
+            <i class="fas fa-spinner fa-spin"></i> Chargement du panier...
+          </div>
+        </div>
+      </div>
+      
+      <div class="cart-summary-container">
+        <div class="cart-summary">
+          <h3><i class="fas fa-receipt"></i> Récapitulatif</h3>
+          
+          <div id="cart-summary">
+            <div class="loading-cart">
+              <i class="fas fa-spinner fa-spin"></i> Calcul en cours...
+            </div>
+          </div>
+          
+          <div class="shipping-info">
+            <h4><i class="fas fa-truck"></i> Livraison</h4>
+            <p>Livraison gratuite à Niamey pour les commandes de plus de 10 000 FCFA.</p>
+            <p>Autres villes : frais variables selon la destination.</p>
+          </div>
+          
+          <div class="payment-methods">
+            <h4><i class="fas fa-credit-card"></i> Moyens de paiement</h4>
+            <div class="payment-icons">
+              <span class="payment-icon"><i class="fas fa-money-bill-wave"></i> Espèces</span>
+              <span class="payment-icon"><i class="fab fa-whatsapp"></i> WhatsApp</span>
+              <span class="payment-icon"><i class="fas fa-mobile-alt"></i> Mobile Money</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VoltsNiger</h4>
+          <p>Votre boutique électronique à Niamey depuis 2023.</p>
+          <div class="social">
+            <a href="https://wa.me/22793033158" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Liens</h4>
+          <a href="index.html">Accueil</a>
+          <a href="produits.html">Produits</a>
+          <a href="panier.html">Panier</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker"></i> Niamey, Niger</p>
+          <p><i class="fas fa-phone"></i> +227 93 03 31 58</p>
+          <p><i class="fas fa-phone"></i> +227 89 63 15 95</p>
+          <p><i class="fas fa-envelope"></i> voltsniger@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltsNiger. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+  <script>
+    // Fonctions spécifiques au panier
+    let allProducts = [];
+    
+    // Charger les produits
+    async function loadProductsForCart() {
+      try {
+        const response = await fetch('produits.json');
+        const data = await response.json();
+        allProducts = data.produits;
+        displayCart();
+      } catch (error) {
+        console.error('Erreur de chargement des produits:', error);
+      }
+    }
+    
+    // Afficher le panier
+    function displayCart() {
+      const container = document.getElementById('cart-items');
+      const summary = document.getElementById('cart-summary');
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Votre panier est vide</h3>
+            <p>Ajoutez des produits pour commencer vos achats</p>
+            <a href="produits.html" class="btn btn-primary" style="margin-top: 20px;">
+              <i class="fas fa-shopping-bag"></i> Découvrir nos produits
+            </a>
+          </div>
+        `;
+        
+        if (summary) {
+          summary.innerHTML = '';
+        }
+        return;
+      }
+      
+      // Afficher les articles
+      let subtotal = 0;
+      container.innerHTML = cart.map((item, index) => {
+        const product = allProducts.find(p => p.id === item.id) || item;
+        const itemTotal = (product.prix || item.prix || 0) * (item.quantity || 1);
+        subtotal += itemTotal;
+        
+        return `
+          <div class="cart-item">
+            <img src="${product.images?.[0] || item.image || 'images/produits/default.png'}" 
+                 alt="${product.nom || item.nom}" 
+                 class="cart-item-image">
+            
+            <div class="cart-item-info">
+              <h4>${product.nom || item.nom}</h4>
+              <div class="cart-item-price">${(product.prix || item.prix || 0).toLocaleString()} FCFA</div>
+            </div>
+            
+            <div class="quantity-control">
+              <button class="quantity-btn" onclick="updateCartItem(${index}, ${(item.quantity || 1) - 1})">-</button>
+              <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" 
+                     onchange="updateCartItem(${index}, parseInt(this.value))">
+              <button class="quantity-btn" onclick="updateCartItem(${index}, ${(item.quantity || 1) + 1})">+</button>
+            </div>
+            
+            <div class="cart-item-total">${itemTotal.toLocaleString()} FCFA</div>
+            
+            <button class="remove-btn" onclick="removeFromCart(${index})" title="Supprimer">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+      
+      // Calculer le résumé
+      const shipping = subtotal > 10000 ? 0 : 2000; // Livraison gratuite au-dessus de 10,000 FCFA
+      const total = subtotal + shipping;
+      
+      if (summary) {
+        summary.innerHTML = `
+          <div class="summary-row">
+            <span>Sous-total</span>
+            <span>${subtotal.toLocaleString()} FCFA</span>
+          </div>
+          
+          <div class="summary-row">
+            <span>Livraison</span>
+            <span>${shipping === 0 ? 'Gratuite' : shipping.toLocaleString() + ' FCFA'}</span>
+          </div>
+          
+          ${shipping > 0 ? `
+            <div class="summary-note">
+              <i class="fas fa-info-circle"></i>
+              Livraison gratuite à partir de 10 000 FCFA
+            </div>
+          ` : ''}
+          
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>${total.toLocaleString()} FCFA</span>
+          </div>
+          
+          <div class="cart-actions">
+            <button onclick="checkoutWhatsApp()" class="btn btn-primary btn-full">
+              <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+            </button>
+            
+            <button onclick="clearCart()" class="btn btn-outline btn-full">
+              <i class="fas fa-trash"></i> Vider le panier
+            </button>
+          </div>
+        `;
+      }
+    }
+    
+    // Mettre à jour la quantité
+    function updateCartItem(index, newQuantity) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (newQuantity < 1) {
+        removeFromCart(index);
+        return;
+      }
+      
+      const item = cart[index];
+      
+      // Vérifier le stock
+      const product = allProducts.find(p => p.id === item.id);
+      if (product && product.stock && newQuantity > product.stock) {
+        showNotification(`Stock insuffisant. Maximum: ${product.stock}`, 'error');
+        return;
+      }
+      
+      cart[index].quantity = newQuantity;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Mettre à jour le compteur
+      updateCartCount();
+      
+      // Re-afficher le panier
+      displayCart();
+      
+      showNotification('Quantité mise à jour');
+    }
+    
+    // Supprimer un article
+    function removeFromCart(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemName = cart[index].nom;
+      
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Mettre à jour le compteur
+      updateCartCount();
+      
+      // Re-afficher le panier
+      displayCart();
+      
+      showNotification(`${itemName} retiré du panier`);
+    }
+    
+    // Vider le panier
+    function clearCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        showNotification('Le panier est déjà vide', 'error');
+        return;
+      }
+      
+      if (confirm('Voulez-vous vraiment vider tout votre panier ?')) {
+        localStorage.removeItem('cart');
+        
+        // Mettre à jour le compteur
+        updateCartCount();
+        
+        // Re-afficher le panier
+        displayCart();
+        
+        showNotification('Panier vidé');
+      }
+    }
+    
+    // Commander via WhatsApp
+    function checkoutWhatsApp() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        showNotification('Votre panier est vide', 'error');
+        return;
+      }
+      
+      const phoneNumber = '22793033158';
+      let message = `Bonjour VoltsNiger,\n\nJe souhaite commander les produits suivants :\n\n`;
+      
+      let subtotal = 0;
+      cart.forEach((item, index) => {
+        const product = allProducts.find(p => p.id === item.id) || item;
+        const price = product.prix || item.prix || 0;
+        const total = price * (item.quantity || 1);
+        subtotal += total;
+        
+        message += `${index + 1}. ${product.nom || item.nom}\n`;
+        message += `   Quantité: ${item.quantity || 1}\n`;
+        message += `   Prix unitaire: ${price.toLocaleString()} FCFA\n`;
+        message += `   Total: ${total.toLocaleString()} FCFA\n\n`;
+      });
+      
+      const shipping = subtotal > 10000 ? 0 : 2000;
+      const total = subtotal + shipping;
+      
+      message += `Sous-total: ${subtotal.toLocaleString()} FCFA\n`;
+      message += `Livraison: ${shipping === 0 ? 'Gratuite' : shipping.toLocaleString() + ' FCFA'}\n`;
+      message += `TOTAL: ${total.toLocaleString()} FCFA\n\n`;
+      message += `Merci de me contacter pour finaliser la commande.\n`;
+      message += `Nom: [À COMPLÉTER]\n`;
+      message += `Adresse: [À COMPLÉTER]\n`;
+      message += `Téléphone: [À COMPLÉTER]`;
+      
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+    
+    // Afficher une notification
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
+        <span>${message}</span>
+      `;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideIn 0.3s ease;
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+    
+    // Mettre à jour le compteur panier
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      
+      document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = totalItems;
+        el.style.display = totalItems > 0 ? 'inline' : 'none';
+      });
+    }
+    
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', async function() {
+      console.log('Page panier chargée');
+      
+      // Menu mobile
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener('click', () => {
+          siteNav.classList.toggle('active');
+        });
+      }
+      
+      // Charger les données produits
+      await loadProductsForCart();
+      
+      // Mettre à jour le compteur
+      updateCartCount();
+    });
+    
+    // Exposer les fonctions globalement
+    window.updateCartItem = updateCartItem;
+    window.removeFromCart = removeFromCart;
+    window.clearCart = clearCart;
+    window.checkoutWhatsApp = checkoutWhatsApp;
+    window.updateCartCount = updateCartCount;
+    window.showNotification = showNotification;
+    
+    // Ajouter des animations CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
