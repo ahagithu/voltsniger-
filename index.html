@@ -11,27 +11,36 @@
 <body>
   <!-- HEADER -->
   <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <i class="fas fa-bolt"></i>
-        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+  <div class="container header-inner">
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <i class="fas fa-bolt"></i>
+      <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+    </a>
+    
+    <!-- Bouton menu mobile -->
+    <button class="menu-toggle" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Navigation -->
+    <nav class="site-nav" aria-label="Navigation principale">
+      <a href="index.html" class="nav-home">
+        <i class="fas fa-home"></i> Accueil
       </a>
-      
-      <button class="menu-toggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      
-      <nav class="site-nav">
-        <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
-        <a href="produits.html"><i class="fas fa-shopping-bag"></i> Produits</a>
-        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-        <a href="panier.html" class="cart-link">
-          <i class="fas fa-shopping-cart"></i> Panier
-          <span class="cart-count">0</span>
-        </a>
-      </nav>
-    </div>
-  </header>
+      <a href="produits.html" class="nav-produits">
+        <i class="fas fa-shopping-bag"></i> Produits
+      </a>
+      <a href="contact.html" class="nav-contact">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a href="panier.html" class="cart-link nav-panier">
+        <i class="fas fa-shopping-cart"></i> Panier
+        <span class="cart-count">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
 
   <!-- HERO SECTION -->
   <section class="hero">
