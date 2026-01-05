@@ -10,8 +10,8 @@ const CONFIG = {
 };
 
 // ===== ÉTAT GLOBAL =====
-let allProducts = [];
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+var allProducts = [];
+var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // ===== FONCTIONS DE BASE =====
 
