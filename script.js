@@ -14,45 +14,36 @@ let allProducts = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentPage = '';
 
-// ===== INITIALISATION =====
-document.addEventListener('DOMContentLoaded', function() {
-  // Détecter la page actuelle
-  currentPage = document.documentElement.dataset.page || '';
-  
-  // Charger les composants partagés
-  loadSharedComponents();
-  
-  // Initialiser le menu mobile
-  initMobileMenu();
-  
-  // Mettre à jour le compteur panier
-  updateCartCount();
-  
-  // Exécuter les fonctions spécifiques à la page
-  switch(currentPage) {
-    case 'index':
-      loadProducts('featured-products', 6);
-      break;
-    case 'produits':
-      loadProducts('products-container');
-      initFilters();
-      break;
-    case 'contact':
-      initContactForm();
-      break;
-    case 'panier':
-      loadCart();
-      break;
-    case 'produit':
-      loadProductDetail();
-      break;
-  }
-});
+// ===== FONCTIONS UTILITAIRES (définies d'abord) =====
 
-// ===== FONCTIONS PARTAGÉES =====
+// Menu mobile
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const siteNav = document.querySelector('.site-nav');
+  
+  if (menuToggle && siteNav) {
+    menuToggle.addEventListener('click', () => {
+      siteNav.classList.toggle('active');
+    });
+    
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('active');
+      });
+    });
+  }
+}
+
+// Mettre à jour le compteur panier
+function updateCartCount() {
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  document.querySelectorAll('.cart-count').forEach(el => {
+    el.textContent = totalItems;
+    el.style.display = totalItems > 0 ? 'inline' : 'none';
+  });
+}
 
 // Charger les composants partagés
-// ===== CHARGEMENT DES COMPOSANTS PARTAGÉS =====
 async function loadSharedComponents() {
   try {
     // Charger le fichier shared.html
@@ -156,14 +147,110 @@ function createFallbackComponents() {
   `;
   document.body.appendChild(footer);
 }
+
+// Afficher une notification
+function showNotification(message, type = 'success') {
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.innerHTML = `
+    <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
+    <span>${message}</span>
+  `;
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// ===== INITIALISATION =====
+document.addEventListener('DOMContentLoaded', async function() {
+  console.log('DOM chargé - Début initialisation');
+  
+  // Détecter la page actuelle
+  currentPage = document.documentElement.dataset.page || '';
+  console.log('Page détectée:', currentPage);
+  
+  // Charger les composants partagés
+  console.log('Chargement des composants partagés...');
+  await loadSharedComponents();
+  console.log('Composants partagés chargés');
+  
+  // Initialiser le menu mobile (maintenant le header est chargé)
+  console.log('Initialisation du menu mobile...');
+  initMobileMenu();
+  console.log('Menu mobile initialisé');
+  
+  // Mettre à jour le compteur panier
+  console.log('Mise à jour du compteur panier...');
+  updateCartCount();
+  console.log('Compteur panier mis à jour');
+  
+  // Exécuter les fonctions spécifiques à la page
+  console.log('Exécution des fonctions spécifiques à la page:', currentPage);
+  switch(currentPage) {
+    case 'index':
+      await loadProducts('featured-products', 6);
+      break;
+    case 'produits':
+      await loadProducts('products-container');
+      initFilters();
+      break;
+    case 'contact':
+      initContactForm();
+      break;
+    case 'panier':
+      await loadProducts(); // Charger d'abord les produits
+      loadCart();
+      break;
+    case 'produit':
+      await loadProductDetail();
+      break;
+  }
+  
+  console.log('Initialisation terminée');
+});
+
 // ===== GESTION DES PRODUITS =====
+
+// Obtenir le nom de la catégorie
+function getCategoryName(categoryId) {
+  const categories = {
+    'microcontroleurs': 'Microcontrôleurs',
+    'communication': 'Communication',
+    'capteurs': 'Capteurs',
+    'moteurs': 'Moteurs',
+    'alimentation': 'Alimentation',
+    'accessoires': 'Accessoires'
+  };
+  return categories[categoryId] || categoryId;
+}
 
 // Charger tous les produits
 async function loadProducts(containerId = null, limit = null) {
   try {
+    console.log('Chargement des produits...');
     const response = await fetch('produits.json');
     const data = await response.json();
     allProducts = data.produits;
+    console.log('Produits chargés:', allProducts.length);
     
     // Ajuster les stocks si nécessaire
     await adjustStockIfNeeded();
@@ -176,18 +263,25 @@ async function loadProducts(containerId = null, limit = null) {
       }
     }
     
+    return allProducts;
+    
   } catch (error) {
     console.error('Erreur de chargement des produits:', error);
-    showError('Impossible de charger les produits');
+    showNotification('Impossible de charger les produits', 'error');
+    return [];
   }
 }
 
 // Afficher les produits (version simple)
 function displayProducts(containerId, products, limit = null) {
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container) {
+    console.error('Conteneur non trouvé:', containerId);
+    return;
+  }
   
   let productsToShow = limit ? products.slice(0, limit) : products;
+  console.log('Affichage de', productsToShow.length, 'produits dans', containerId);
   
   if (productsToShow.length === 0) {
     container.innerHTML = '<p class="text-center">Aucun produit trouvé.</p>';
@@ -202,6 +296,7 @@ function displayProductsWithFilters(containerId, products) {
   const container = document.getElementById(containerId);
   if (!container) return;
   
+  console.log('Affichage produits avec filtres:', products.length);
   container.innerHTML = products.map(product => createProductCard(product)).join('');
 }
 
@@ -277,21 +372,10 @@ function createProductCard(product) {
   `;
 }
 
-// Obtenir le nom de la catégorie
-function getCategoryName(categoryId) {
-  const categories = {
-    'microcontroleurs': 'Microcontrôleurs',
-    'communication': 'Communication',
-    'capteurs': 'Capteurs',
-    'moteurs': 'Moteurs',
-    'alimentation': 'Alimentation',
-    'accessoires': 'Accessoires'
-  };
-  return categories[categoryId] || categoryId;
-}
-
 // ===== FILTRES (page produits) =====
 function initFilters() {
+  console.log('Initialisation des filtres...');
+  
   // Recherche
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
@@ -312,6 +396,8 @@ function initFilters() {
       filterProducts('', category);
     });
   });
+  
+  console.log('Filtres initialisés');
 }
 
 function filterProducts(searchTerm = '', category = 'all') {
@@ -362,14 +448,6 @@ function addToCart(productId, quantity = 1) {
   showNotification(`${product.nom} ajouté au panier`);
 }
 
-function updateCartCount() {
-  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  document.querySelectorAll('.cart-count').forEach(el => {
-    el.textContent = totalItems;
-    el.style.display = totalItems > 0 ? 'inline' : 'none';
-  });
-}
-
 function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
@@ -412,31 +490,15 @@ function orderWhatsAppProduct(productId) {
   showNotification(`Commande WhatsApp envoyée pour ${product.nom}`);
 }
 
-// ===== NOTIFICATIONS =====
-function showNotification(message, type = 'success') {
-  const notification = document.createElement('div');
-  notification.className = `notification ${type}`;
-  notification.innerHTML = `
-    <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
-    <span>${message}</span>
-  `;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.style.animation = 'slideOut 0.3s ease';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
 // ===== GESTION DU STOCK =====
 async function adjustStockIfNeeded() {
   try {
     const stockResponse = await fetch('stock-manager.json');
     const stockData = await stockResponse.json();
     
-    // Mettre à jour les stocks si le fichier existe
+    // Mettre à jour les stocks si le fichier existe et override = true
     if (stockData.override) {
+      console.log('Mise à jour des stocks depuis stock-manager.json');
       allProducts.forEach(product => {
         const stockItem = stockData.stocks.find(s => s.id === product.id);
         if (stockItem) {
@@ -446,13 +508,18 @@ async function adjustStockIfNeeded() {
     }
   } catch (error) {
     // Fichier stock-manager.json n'existe pas ou erreur de lecture
-    console.log('Gestionnaire de stock non configuré');
+    console.log('Gestionnaire de stock non configuré, utilisation des stocks par défaut');
   }
 }
 
 // ===== FONCTIONS POUR PAGE PANIER =====
-function loadCart() {
-  if (!document.getElementById('cart-items')) return;
+async function loadCart() {
+  console.log('Chargement du panier...');
+  
+  // S'assurer que les produits sont chargés
+  if (allProducts.length === 0) {
+    await loadProducts();
+  }
   
   displayCart();
 }
@@ -460,6 +527,11 @@ function loadCart() {
 function displayCart() {
   const container = document.getElementById('cart-items');
   const summary = document.getElementById('cart-summary');
+  
+  if (!container) {
+    console.error('Conteneur panier non trouvé');
+    return;
+  }
   
   if (cart.length === 0) {
     container.innerHTML = `
@@ -483,18 +555,24 @@ function displayCart() {
     
     return `
       <div class="cart-item">
-        <img src="${product.images?.[0] || item.image}" alt="${product.nom}" class="cart-item-image">
+        <img src="${product.images?.[0] || item.image || 'images/produits/default.png'}" 
+             alt="${product.nom || item.nom}" 
+             class="cart-item-image">
+        
         <div class="cart-item-info">
           <h4>${product.nom || item.nom}</h4>
           <div class="cart-item-price">${(product.prix || item.prix).toLocaleString()} FCFA</div>
         </div>
+        
         <div class="quantity-control">
           <button class="quantity-btn" onclick="updateCartItem(${index}, ${(item.quantity || 1) - 1})">-</button>
           <input type="number" value="${item.quantity || 1}" min="1" 
                  onchange="updateCartItem(${index}, parseInt(this.value))">
           <button class="quantity-btn" onclick="updateCartItem(${index}, ${(item.quantity || 1) + 1})">+</button>
         </div>
+        
         <div class="cart-item-total">${itemTotal.toLocaleString()} FCFA</div>
+        
         <button class="remove-btn" onclick="removeFromCart(${index})">
           <i class="fas fa-trash"></i>
         </button>
@@ -511,14 +589,17 @@ function displayCart() {
         <span>Sous-total</span>
         <span>${subtotal.toLocaleString()} FCFA</span>
       </div>
+      
       <div class="summary-row">
         <span>Livraison</span>
         <span>${shipping === 0 ? 'Gratuite' : shipping.toLocaleString() + ' FCFA'}</span>
       </div>
+      
       <div class="summary-row total">
         <span>Total</span>
         <span>${total.toLocaleString()} FCFA</span>
       </div>
+      
       <button onclick="checkoutWhatsApp()" class="btn btn-primary btn-full">
         <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
       </button>
@@ -592,6 +673,8 @@ function checkoutWhatsApp() {
 
 // ===== FONCTIONS POUR PAGE PRODUIT =====
 async function loadProductDetail() {
+  console.log('Chargement du détail produit...');
+  
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
   
@@ -606,13 +689,16 @@ async function loadProductDetail() {
   
   const product = allProducts.find(p => p.id === productId);
   if (!product) {
-    document.getElementById('product-content').innerHTML = `
-      <div class="error-state">
-        <i class="fas fa-exclamation-triangle"></i>
-        <h2>Produit non trouvé</h2>
-        <a href="produits.html" class="btn btn-primary">Retour aux produits</a>
-      </div>
-    `;
+    const container = document.getElementById('product-content');
+    if (container) {
+      container.innerHTML = `
+        <div class="error-state">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h2>Produit non trouvé</h2>
+          <a href="produits.html" class="btn btn-primary">Retour aux produits</a>
+        </div>
+      `;
+    }
     return;
   }
   
@@ -621,6 +707,8 @@ async function loadProductDetail() {
 
 function displayProductDetail(product) {
   const container = document.getElementById('product-content');
+  if (!container) return;
+  
   const stockText = product.stock > 0 ? 
     `<div class="product-stock in-stock"><i class="fas fa-check"></i> ${product.stock} en stock</div>` :
     `<div class="product-stock out-of-stock"><i class="fas fa-times"></i> Rupture de stock</div>`;
