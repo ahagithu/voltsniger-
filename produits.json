@@ -6,34 +6,28 @@
       "nomComplet": "Module ESP32 WiFi/Bluetooth Dual-Core",
       "prix": 9000,
       "devise": "FCFA",
-      "images": ["images/produits/esp32.png", "images/produits/esp32-2.png", "images/produits/esp32-3.png"],
-      "description": "Microcontrôleur puissant avec WiFi et Bluetooth intégrés, idéal pour projets IoT, domotique et objets connectés.",
+      "images": ["images/produits/esp32.png"],
+      "description": "Microcontrôleur puissant avec WiFi et Bluetooth intégrés, idéal pour projets IoT.",
       "caracteristiques": [
         "Dual-core Xtensa LX6 (240 MHz)",
         "WiFi 802.11 b/g/n",
         "Bluetooth 4.2 BR/EDR et BLE",
         "34 GPIO programmables",
-        "Mémoire: 520KB SRAM, 4MB Flash",
-        "Tension d'alimentation: 3.3V",
-        "Consommation: ultra-basse puissance"
+        "Mémoire: 520KB SRAM"
       ],
       "avantages": [
         "Connectivité sans fil intégrée",
         "Puissance de calcul élevée",
         "Idéal pour projets IoT",
-        "Grande communauté de support",
-        "Compatibilité Arduino IDE"
+        "Grande communauté de support"
       ],
       "limitations": [
-        "Consommation électrique élevée en mode actif",
-        "Nécessite alimentation 3.3V stable",
-        "Programmation nécessite USB-TTL"
+        "Consommation électrique élevée",
+        "Nécessite alimentation 3.3V stable"
       ],
       "categorie": "microcontroleurs",
       "stock": 15,
-      "nouveau": true,
-      "enPromotion": false,
-      "tags": ["iot", "wifi", "bluetooth", "esp32", "microcontroleur"]
+      "nouveau": true
     },
     {
       "id": "arduino-nano",
@@ -41,69 +35,56 @@
       "nomComplet": "Carte Arduino Nano ATmega328P",
       "prix": 7000,
       "devise": "FCFA",
-      "images": ["images/produits/arduino-nano.png", "images/produits/arduino-nano-2.png"],
-      "description": "Carte microcontrôleur compacte parfaite pour les projets embarqués, prototypes électroniques et apprentissage.",
+      "images": ["images/produits/arduino-nano.png"],
+      "description": "Carte microcontrôleur compacte parfaite pour les projets embarqués.",
       "caracteristiques": [
         "Microcontrôleur: ATmega328P",
         "Fréquence: 16 MHz",
-        "Mémoire: 32KB Flash, 2KB SRAM, 1KB EEPROM",
+        "Mémoire: 32KB Flash, 2KB SRAM",
         "Entrées/Sorties: 22 (14 numériques, 8 analogiques)",
-        "Alimentation: 5V (USB) ou 7-12V (Vin)",
-        "Communication: UART, I2C, SPI",
-        "Dimensions: 45x18mm"
+        "Alimentation: 5V (USB) ou 7-12V (Vin)"
       ],
       "avantages": [
         "Taille très compacte",
-        "Facile à programmer avec Arduino IDE",
-        "Large communauté et documentation",
-        "Compatibilité avec de nombreux shields",
-        "Idéal pour débutants"
+        "Facile à programmer",
+        "Large communauté",
+        "Compatibilité avec de nombreux shields"
       ],
       "limitations": [
         "Pas de WiFi/Bluetooth intégré",
-        "Mémoire limitée pour projets complexes",
-        "Moins puissant que ESP32"
+        "Mémoire limitée"
       ],
       "categorie": "microcontroleurs",
       "stock": 25,
-      "nouveau": false,
-      "enPromotion": true,
-      "tags": ["arduino", "nano", "atmega328p", "microcontroleur", "débutant"]
+      "nouveau": false
     },
     {
       "id": "nrf24l01",
       "nom": "nRF24L01+PA",
-      "nomComplet": "Module nRF24L01+PA Long Range 2.4GHz",
+      "nomComplet": "Module nRF24L01+PA Long Range",
       "prix": 6000,
       "devise": "FCFA",
       "images": ["images/produits/nrf24l01.png"],
-      "description": "Module de communication sans fil longue portée (2.4GHz) avec amplificateur pour télécommandes, drones et systèmes de surveillance.",
+      "description": "Module de communication sans fil longue portée (2.4GHz) avec amplificateur.",
       "caracteristiques": [
-        "Portée: jusqu'à 1km avec antenne externe",
-        "Fréquence: 2.4 GHz ISM band",
-        "Débit: 250 kbps, 1 Mbps, 2 Mbps",
-        "Interface: SPI (3.3V)",
-        "Alimentation: 1.9-3.6V (3.3V recommandé)",
-        "Consommation: 11mA en transmission",
-        "Antenne: SMA connecteur pour antenne externe"
+        "Portée: jusqu'à 1km avec antenne",
+        "Fréquence: 2.4 GHz ISM",
+        "Débit: 250 kbps à 2 Mbps",
+        "Interface: SPI",
+        "Alimentation: 3.3V"
       ],
       "avantages": [
         "Longue portée de communication",
         "Faible consommation d'énergie",
-        "Idéal pour télécommandes et drones",
-        "Communication bidirectionnelle",
-        "Résistance aux interférences"
+        "Idéal pour télécommandes et drones"
       ],
       "limitations": [
         "Nécessite 3.3V stable",
-        "Portée dépend de l'environnement",
-        "Configuration SPI nécessaire"
+        "Portée dépend de l'environnement"
       ],
       "categorie": "communication",
       "stock": 18,
-      "nouveau": true,
-      "enPromotion": false,
-      "tags": ["rf", "2.4ghz", "communication", "longue-portée", "sans-fil"]
+      "nouveau": true
     },
     {
       "id": "l298n",
@@ -111,70 +92,56 @@
       "nomComplet": "Module Pilote Moteur L298N Double Pont en H",
       "prix": 5500,
       "devise": "FCFA",
-      "images": ["images/produits/l298n.png", "images/produits/l298n-2.png"],
-      "description": "Pilote de moteur double pour contrôler moteurs DC, moteurs pas-à-pas et autres charges inductives jusqu'à 2A par canal.",
+      "images": ["images/produits/l298n.png"],
+      "description": "Pilote de moteur double pour contrôler moteurs DC et moteurs pas-à-pas.",
       "caracteristiques": [
         "Contrôle 2 moteurs DC ou 1 moteur pas-à-pas",
-        "Tension moteur: 5-35V",
-        "Courant max: 2A par canal (pic 3A)",
-        "Entrées compatibles TTL/CMOS (3.3V/5V)",
-        "Bornes à vis pour connexion facile",
-        "Diode de roue libre intégrée",
-        "Dissipateur thermique inclus"
+        "Tension: 5-35V",
+        "Courant max: 2A par canal",
+        "Entrées compatibles TTL/CMOS",
+        "Bornes à vis pour connexion facile"
       ],
       "avantages": [
         "Permet inversion de sens des moteurs",
         "Support PWM pour contrôle de vitesse",
-        "Simple à utiliser avec Arduino/ESP32",
-        "Protection contre surchauffe",
-        "Idéal pour robots et véhicules"
+        "Simple à utiliser avec Arduino/ESP32"
       ],
       "limitations": [
-        "Peut chauffer sous forte charge continue",
-        "Efficacité inférieure aux pilotes modernes",
-        "Courant limité à 2A par canal"
+        "Peut chauffer sous forte charge",
+        "Efficacité inférieure aux pilotes modernes"
       ],
       "categorie": "moteurs",
       "stock": 12,
-      "nouveau": false,
-      "enPromotion": true,
-      "tags": ["moteur", "driver", "pont-en-h", "l298n", "robotique"]
+      "nouveau": false
     },
     {
       "id": "dht22",
       "nom": "Capteur DHT22",
-      "nomComplet": "Capteur de Température et Humidité DHT22 AM2302",
+      "nomComplet": "Capteur de Température et Humidité DHT22",
       "prix": 4500,
       "devise": "FCFA",
       "images": ["images/produits/dht22.png"],
-      "description": "Capteur numérique précis de température et humidité relative avec calibration d'usine, idéal pour stations météo et systèmes HVAC.",
+      "description": "Capteur numérique précis de température et humidité relative.",
       "caracteristiques": [
         "Plage température: -40°C à 80°C",
         "Précision température: ±0.5°C",
         "Plage humidité: 0-100% RH",
-        "Précision humidité: ±2% RH (max ±5%)",
-        "Interface: One-Wire Digital",
-        "Tension: 3.3V-5.5V",
-        "Consommation: 2.5mA max"
+        "Précision humidité: ±2% RH",
+        "Interface: One-Wire Digital"
       ],
       "avantages": [
         "Haute précision de mesure",
         "Calibration d'usine",
         "Faible consommation",
-        "Longue durée de vie",
-        "Sortie numérique (pas besoin d'ADC)",
-        "Résistance à la condensation"
+        "Longue durée de vie"
       ],
       "limitations": [
         "Temps de réponse: 2 secondes",
-        "Distance de câble limitée (20m max)",
-        "Ne pas exposer à liquides directs"
+        "Distance de câble limitée"
       ],
       "categorie": "capteurs",
       "stock": 30,
-      "nouveau": true,
-      "enPromotion": false,
-      "tags": ["capteur", "temperature", "humidité", "dht22", "météo"]
+      "nouveau": true
     },
     {
       "id": "relais-5v",
@@ -182,175 +149,608 @@
       "nomComplet": "Module Relais 5V 1 Canal avec Optocoupleur",
       "prix": 2500,
       "devise": "FCFA",
-      "images": ["images/produits/relais.png", "images/produits/relais-2.png"],
-      "description": "Module relais pour contrôler des charges électriques AC/DC avec microcontrôleur. Isolation optique protège votre circuit de commande.",
+      "images": ["images/produits/relais.png"],
+      "description": "Module relais pour contrôler des charges électriques avec microcontrôleur.",
       "caracteristiques": [
         "Tension de commande: 5V DC",
         "Tension de contact: 250V AC / 30V DC",
-        "Courant max: 10A (AC), 10A (DC)",
+        "Courant max: 10A",
         "Isolation optique intégrée",
-        "LED indicateur d'état",
-        "Borniers à vis pour connexion",
-        "Relais: 5V, SPDT (1 Form C)"
+        "LED indicateur d'état"
       ],
       "avantages": [
         "Protection de votre microcontrôleur",
         "Contrôle de charges AC/DC",
-        "Montage facile sur breadboard",
-        "Indicateur LED de fonctionnement",
-        "Idéal pour domotique",
-        "Faible consommation (70mA)"
+        "Montage facile",
+        "Indicateur LED"
       ],
       "limitations": [
         "Courant limité à 10A",
-        "Nécessite circuit de protection pour charges inductives",
-        "Un seul canal par module"
+        "Nécessite circuit de protection pour charges inductives"
       ],
       "categorie": "accessoires",
       "stock": 40,
-      "nouveau": false,
-      "enPromotion": true,
-      "tags": ["relais", "commutateur", "ac", "dc", "domotique"]
+      "nouveau": false
     },
     {
-      "id": "hc-sr04",
-      "nom": "HC-SR04 Ultrason",
-      "nomComplet": "Capteur de Distance Ultrason HC-SR04",
+      "id": "kit-arduino-uno",
+      "nom": "Kit Arduino Uno",
+      "nomComplet": "Kit de Démarrage Arduino Uno R3 Complet",
+      "prix": 15000,
+      "devise": "FCFA",
+      "images": ["images/produits/kit-arduino-uno.jpg"],
+      "description": "Kit complet pour débuter avec Arduino Uno, incluant la carte et les composants essentiels.",
+      "caracteristiques": [
+        "Carte Arduino Uno R3 originale",
+        "Câble USB A/B",
+        "70+ composants électroniques",
+        "Guide de démarrage en français",
+        "Projets préconfigurés"
+      ],
+      "avantages": [
+        "Idéal pour les débutants",
+        "Tout le nécessaire dans un kit",
+        "Documentation complète",
+        "Support technique inclus"
+      ],
+      "limitations": [
+        "Plus cher que la carte seule",
+        "Certains composants basiques"
+      ],
+      "categorie": "kits",
+      "stock": 1,
+      "nouveau": true
+    },
+    {
+      "id": "controleur-temperature",
+      "nom": "Contrôleur de Température",
+      "nomComplet": "Module Contrôleur de Température Numérique",
       "prix": 3500,
       "devise": "FCFA",
-      "images": ["images/produits/hc-sr04.png"],
-      "description": "Capteur de distance à ultrasons pour mesurer des distances de 2cm à 400cm avec une précision de 3mm. Idéal pour robots, parkings intelligents.",
+      "images": ["images/produits/controleur-temperature.jpg"],
+      "description": "Module de contrôle de température pour systèmes de chauffage/refroidissement.",
       "caracteristiques": [
-        "Portée: 2cm - 400cm",
-        "Précision: 3mm",
-        "Angle de mesure: 15°",
-        "Tension: 5V DC",
-        "Courant: 15mA",
-        "Fréquence: 40kHz",
-        "Dimensions: 45x20x15mm"
+        "Plage: -50°C à 110°C",
+        "Précision: ±0.5°C",
+        "Sortie relais: 10A/250V",
+        "Alimentation: 12V DC",
+        "Écran LCD rétroéclairé"
       ],
       "avantages": [
-        "Mesure précise sans contact",
-        "Faible coût",
-        "Facile à utiliser",
-        "Idéal pour évitement d'obstacles",
-        "Fonctionne dans l'obscurité"
+        "Réglage précis de température",
+        "Facile à programmer",
+        "Protection contre les surtensions",
+        "Applications industrielles"
       ],
       "limitations": [
-        "Sensible aux surfaces absorbantes",
-        "Angle de mesure limité",
-        "Performances réduites en extérieur"
+        "Nécessite sonde externe",
+        "Consommation 2-3W"
       ],
       "categorie": "capteurs",
-      "stock": 22,
-      "nouveau": false,
-      "enPromotion": false,
-      "tags": ["ultrason", "distance", "capteur", "robotique", "mesure"]
+      "stock": 5,
+      "nouveau": true
     },
     {
-      "id": "mpu6050",
-      "nom": "MPU6050 Gyroscope",
-      "nomComplet": "Module Gyroscope/Accéléromètre MPU6050 6 Axes",
-      "prix": 5000,
+      "id": "roues-motrices",
+      "nom": "Roues Motrices",
+      "nomComplet": "Paire de Roues Motrices pour Robots",
+      "prix": 2500,
       "devise": "FCFA",
-      "images": ["images/produits/mpu6050.png"],
-      "description": "Module capteur inertiel 6 axes (3 axes gyroscope + 3 axes accéléromètre) pour navigation, stabilisation et réalité virtuelle.",
+      "images": ["images/produits/roues-motrices.jpg"],
+      "description": "Roues en caoutchouc avec moteur intégré pour robots et véhicules télécommandés.",
       "caracteristiques": [
-        "Accéléromètre: ±2g, ±4g, ±8g, ±16g",
-        "Gyroscope: ±250, ±500, ±1000, ±2000°/sec",
-        "Communication: I2C (adresse 0x68 ou 0x69)",
-        "Tension: 3-5V",
-        "Processeur DMP intégré",
-        "Température interne",
-        "Faible consommation"
+        "Diamètre: 65mm",
+        "Largeur: 20mm",
+        "Tension: 3-6V DC",
+        "Vitesse: 100-200 RPM",
+        "Couple: 0.8 kg-cm"
       ],
       "avantages": [
-        "6 axes en un seul module",
-        "Processeur DMP pour calculs avancés",
+        "Montage facile",
+        "Adhérence optimale",
+        "Silencieuses",
+        "Durables"
+      ],
+      "limitations": [
+        "Pour charges légères",
+        "Vitesse fixe"
+      ],
+      "categorie": "moteurs",
+      "stock": 10,
+      "nouveau": true
+    },
+    {
+      "id": "moteur-dc",
+      "nom": "Moteur DC",
+      "nomComplet": "Moteur à Courant Continu Réducté",
+      "prix": 1800,
+      "devise": "FCFA",
+      "images": ["images/produits/moteur-dc.jpg"],
+      "description": "Moteur électrique à courant continu pour applications robotiques et mécaniques.",
+      "caracteristiques": [
+        "Tension: 3-6V",
+        "Courant: 70-250mA",
+        "Vitesse: 100 RPM",
+        "Couple: 0.8 kg-cm",
+        "Réducteur métallique"
+      ],
+      "avantages": [
         "Faible consommation",
-        "Haute précision",
-        "Idéal pour drones et robots"
+        "Longue durée de vie",
+        "Compact",
+        "Polyvalent"
       ],
       "limitations": [
-        "Nécessite calibration",
-        "Dérive possible",
-        "Communication I2C seulement"
+        "Puissance limitée",
+        "Nécessite driver"
       ],
-      "categorie": "capteurs",
-      "stock": 8,
-      "nouveau": true,
-      "enPromotion": false,
-      "tags": ["gyroscope", "accéléromètre", "imu", "navigation", "drone"]
+      "categorie": "moteurs",
+      "stock": 10,
+      "nouveau": false
     },
     {
-      "id": "alim-5v",
-      "nom": "Alimentation 5V 3A",
-      "nomComplet": "Alimentation 5V DC 3A avec Connecteur Barrel",
-      "prix": 4000,
+      "id": "relais-1x",
+      "nom": "Relais 1 Canal",
+      "nomComplet": "Module Relais 1 Canal 5V/10A",
+      "prix": 1200,
       "devise": "FCFA",
-      "images": ["images/produits/alim-5v.png"],
-      "description": "Alimentation secteur 5V 3A avec connecteur barrel 2.1mm pour alimenter Arduino, Raspberry Pi, LEDs et autres projets électroniques.",
+      "images": ["images/produits/relais-1x.jpg"],
+      "description": "Module relais simple canal pour contrôler appareils électriques avec Arduino.",
       "caracteristiques": [
-        "Tension de sortie: 5V DC",
-        "Courant max: 3A (15W)",
-        "Tension d'entrée: 100-240V AC",
-        "Connecteur: 2.1mm centre positif",
-        "Câble: 1.5m",
-        "Protections: court-circuit, surcharge",
-        "Ripple: <100mV"
-      ],
-      "avantages": [
-        "Puissance suffisante pour la plupart des projets",
-        "Entrée universelle 100-240V",
-        "Protections intégrées",
-        "Long câble d'alimentation",
-        "Stable et fiable"
-      ],
-      "limitations": [
-        "Tension fixe 5V seulement",
-        "Taille relativement grande",
-        "Pas de réglage de tension"
-      ],
-      "categorie": "alimentation",
-      "stock": 35,
-      "nouveau": false,
-      "enPromotion": true,
-      "tags": ["alimentation", "5v", "secteur", "power", "adaptateur"]
-    },
-    {
-      "id": "breadboard",
-      "nom": "Breadboard 830 points",
-      "nomComplet": "Breadboard Solderless 830 Points avec Adhésif",
-      "prix": 2000,
-      "devise": "FCFA",
-      "images": ["images/produits/breadboard.png"],
-      "description": "Breadboard sans soudure 830 points pour prototypage rapide de circuits électroniques. Adhésif au dos pour fixation.",
-      "caracteristiques": [
-        "Points de connexion: 830",
-        "Taille: 165x55x9mm",
-        "Rails d'alimentation: 2 (rouge/bleu)",
-        "Résistance d'isolation: >10MΩ",
+        "Tension de commande: 5V DC",
         "Tension max: 250V AC",
-        "Courant max: 1A par point",
-        "Adhésif 3M au dos"
+        "Courant max: 10A",
+        "Isolation: 1500V",
+        "LED indicateur"
       ],
       "avantages": [
-        "Prototypage rapide sans soudure",
-        "Réutilisable à l'infini",
-        "Rails d'alimentation intégrés",
-        "Compatibilité avec composants DIP",
-        "Idéal pour débutants et éducation"
+        "Prix abordable",
+        "Facile à utiliser",
+        "Sécurité électrique",
+        "Applications multiples"
       ],
       "limitations": [
-        "Pas pour circuits permanents",
-        "Limité en courant (1A max)",
-        "Contacts peuvent se desserrer avec le temps"
+        "Un seul canal",
+        "Pour charges moyennes"
       ],
       "categorie": "accessoires",
+      "stock": 4,
+      "nouveau": false
+    },
+    {
+      "id": "relais-2x",
+      "nom": "Relais 2 Canaux",
+      "nomComplet": "Module Relais 2 Canaux 5V Double",
+      "prix": 1800,
+      "devise": "FCFA",
+      "images": ["images/produits/relais-2x.jpg"],
+      "description": "Module double relais pour contrôler deux appareils électriques indépendamment.",
+      "caracteristiques": [
+        "2 relais indépendants",
+        "Tension: 5V DC",
+        "Courant: 10A par canal",
+        "Sorties à vis",
+        "Optocoupleurs intégrés"
+      ],
+      "avantages": [
+        "Contrôle deux appareils",
+        "Isolation complète",
+        "Indicateurs LED",
+        "Compact"
+      ],
+      "limitations": [
+        "Courant limité",
+        "Pour applications domestiques"
+      ],
+      "categorie": "accessoires",
+      "stock": 4,
+      "nouveau": true
+    },
+    {
+      "id": "relais-4x",
+      "nom": "Relais 4 Canaux",
+      "nomComplet": "Module Relais 4 Canaux 5V",
+      "prix": 2800,
+      "devise": "FCFA",
+      "images": ["images/produits/relais-4x.jpg"],
+      "description": "Module quadruple relais pour applications de domotique et automatisation.",
+      "caracteristiques": [
+        "4 relais indépendants",
+        "Tension: 5V DC",
+        "Courant: 10A/250V par canal",
+        "Interface: contrôle individuel",
+        "Protection diode"
+      ],
+      "avantages": [
+        "Contrôle multiple",
+        "Idéal domotique",
+        "Fiable",
+        "Facile à programmer"
+      ],
+      "limitations": [
+        "Consommation plus élevée",
+        "Espace requis"
+      ],
+      "categorie": "accessoires",
+      "stock": 4,
+      "nouveau": true
+    },
+    {
+      "id": "pont-h-l298n",
+      "nom": "Pont en H L298N",
+      "nomComplet": "Driver Moteur Double Pont en H L298N",
+      "prix": 3500,
+      "devise": "FCFA",
+      "images": ["images/produits/pont-h-l298n.jpg"],
+      "description": "Driver pour contrôler vitesse et direction de moteurs DC ou pas-à-pas.",
+      "caracteristiques": [
+        "Contrôle 2 moteurs DC",
+        "Tension: 5-35V",
+        "Courant: 2A par canal",
+        "Support PWM",
+        "Protection thermique"
+      ],
+      "avantages": [
+        "Bidirectionnel",
+        "Contrôle vitesse",
+        "Robuste",
+        "Documentation abondante"
+      ],
+      "limitations": [
+        "Chauffe sous charge",
+        "Efficacité moyenne"
+      ],
+      "categorie": "moteurs",
+      "stock": 5,
+      "nouveau": false
+    },
+    {
+      "id": "irfz44n",
+      "nom": "MOSFET IRFZ44N",
+      "nomComplet": "Transistor MOSFET N-Channel IRFZ44N",
+      "prix": 500,
+      "devise": "FCFA",
+      "images": ["images/produits/irfz44n.jpg"],
+      "description": "Transistor MOSFET de puissance pour commutation rapide de charges élevées.",
+      "caracteristiques": [
+        "Type: N-Channel",
+        "Tension Vds: 55V",
+        "Courant Id: 49A",
+        "Résistance Rds: 0.022Ω",
+        "Boîtier: TO-220"
+      ],
+      "avantages": [
+        "Faible résistance",
+        "Commutation rapide",
+        "Puissant",
+        "Applications variées"
+      ],
+      "limitations": [
+        "Nécessite dissipateur",
+        "Sensible aux décharges statiques"
+      ],
+      "categorie": "composants",
+      "stock": 30,
+      "nouveau": true
+    },
+    {
+      "id": "ne555p",
+      "nom": "NE555P",
+      "nomComplet": "Circuit Intégré Timer NE555P",
+      "prix": 300,
+      "devise": "FCFA",
+      "images": ["images/produits/ne555p.jpg"],
+      "description": "Timer précis 555 pour générer impulsions et signaux de timing.",
+      "caracteristiques": [
+        "Tension: 4.5-16V",
+        "Courant sortie: 200mA",
+        "Fréquence: 500kHz max",
+        "Précision: 1%",
+        "Boîtier: DIP-8"
+      ],
+      "avantages": [
+        "Polyvalent",
+        "Précis",
+        "Robuste",
+        "Documentation riche"
+      ],
+      "limitations": [
+        "Consommation moyenne",
+        "Ancien modèle"
+      ],
+      "categorie": "composants",
       "stock": 50,
-      "nouveau": false,
-      "enPromotion": false,
-      "tags": ["breadboard", "prototypage", "test", "sans-soudure", "débutant"]
+      "nouveau": false
+    },
+    {
+      "id": "capaciteur-ceramique",
+      "nom": "Capaciteur Céramique",
+      "nomComplet": "Lot de Capaciteurs Céramiques Multicouches",
+      "prix": 1500,
+      "devise": "FCFA",
+      "images": ["images/produits/capaciteur-ceramique.jpg"],
+      "description": "Lot de capaciteurs céramiques pour circuits électroniques de découplage et filtrage.",
+      "caracteristiques": [
+        "Valeurs: 10pF à 1μF",
+        "Tension: 50V",
+        "Tolérance: 10%",
+        "Type: Multilayer",
+        "Lot de 300 pièces"
+      ],
+      "avantages": [
+        "Non polarisé",
+        "Faibles pertes",
+        "Stable",
+        "Économique en lot"
+      ],
+      "limitations": [
+        "Faible capacité max",
+        "Sensible à la température"
+      ],
+      "categorie": "composants",
+      "stock": 300,
+      "nouveau": true
+    },
+    {
+      "id": "photo-resistor",
+      "nom": "Photo-Résistance",
+      "nomComplet": "Cellule Photo-Résistive LDR",
+      "prix": 200,
+      "devise": "FCFA",
+      "images": ["images/produits/photo-resistor.jpg"],
+      "description": "Résistance variable selon l'intensité lumineuse pour détecteurs de lumière.",
+      "caracteristiques": [
+        "Résistance obscure: 1MΩ",
+        "Résistance lumineuse: 10-20kΩ",
+        "Temps réponse: 30ms",
+        "Spectre: visible",
+        "Puissance: 100mW"
+      ],
+      "avantages": [
+        "Simple à utiliser",
+        "Prix bas",
+        "Robuste",
+        "Applications variées"
+      ],
+      "limitations": [
+        "Réponse lente",
+        "Non linéaire"
+      ],
+      "categorie": "capteurs",
+      "stock": 60,
+      "nouveau": false
+    },
+    {
+      "id": "dc-speed-controller",
+      "nom": "Contrôleur Vitesse DC",
+      "nomComplet": "Régulateur de Vitesse pour Moteur DC PWM",
+      "prix": 2500,
+      "devise": "FCFA",
+      "images": ["images/produits/dc-speed-controller.jpg"],
+      "description": "Module PWM pour contrôler précisément la vitesse des moteurs DC.",
+      "caracteristiques": [
+        "Tension: 6-28V",
+        "Courant: 10A max",
+        "Fréquence PWM: 25kHz",
+        "Rendement: 95%",
+        "Potentiomètre intégré"
+      ],
+      "avantages": [
+        "Contrôle précis",
+        "Haute efficacité",
+        "Protection court-circuit",
+        "Réglage manuel"
+      ],
+      "limitations": [
+        "Pour DC seulement",
+        "Tension limitée"
+      ],
+      "categorie": "moteurs",
+      "stock": 2,
+      "nouveau": true
+    },
+    {
+      "id": "kit-sensor-arduino",
+      "nom": "Kit Capteurs Arduino",
+      "nomComplet": "Kit de 45 Modules Capteurs pour Arduino",
+      "prix": 12000,
+      "devise": "FCFA",
+      "images": ["images/produits/kit-sensor-arduino.jpg"],
+      "description": "Kit complet avec 45 modules capteurs différents pour projets Arduino.",
+      "caracteristiques": [
+        "45 modules différents",
+        "Capteurs: température, humidité, mouvement, etc.",
+        "Câbles inclus",
+        "Documentation",
+        "Exemples de code"
+      ],
+      "avantages": [
+        "Variété exceptionnelle",
+        "Prix avantageux",
+        "Documentation",
+        "Parfait pour apprentissage"
+      ],
+      "limitations": [
+        "Qualité variable",
+        "Documentation parfois anglaise"
+      ],
+      "categorie": "kits",
+      "stock": 45,
+      "nouveau": true
+    },
+    {
+      "id": "lmxx",
+      "nom": "LMXX Régulateur",
+      "nomComplet": "Régulateur de Tension LM78XX/LM79XX",
+      "prix": 300,
+      "devise": "FCFA",
+      "images": ["images/produits/lmxx.jpg"],
+      "description": "Régulateur de tension fixe pour alimentations stables 5V, 12V, etc.",
+      "caracteristiques": [
+        "Série: 7805, 7812, etc.",
+        "Tension sortie: fixe",
+        "Courant: 1A",
+        "Protection thermique",
+        "Protection court-circuit"
+      ],
+      "avantages": [
+        "Stable",
+        "Simple à utiliser",
+        "Robuste",
+        "Applications variées"
+      ],
+      "limitations": [
+        "Perte en chaleur",
+        "Tension fixe"
+      ],
+      "categorie": "alimentation",
+      "stock": 50,
+      "nouveau": false
+    },
+    {
+      "id": "contact-3-positions",
+      "nom": "Contact 3 Positions",
+      "nomComplet": "Interrupteur à 3 Positions ON-OFF-ON",
+      "prix": 800,
+      "devise": "FCFA",
+      "images": ["images/produits/contact-3-positions.jpg"],
+      "description": "Interrupteur bascule à 3 positions pour circuits de contrôle.",
+      "caracteristiques": [
+        "3 positions: ON-OFF-ON",
+        "Tension: 250V AC",
+        "Courant: 6A",
+        "Montage panneau",
+        "Coloris: noir"
+      ],
+      "avantages": [
+        "Polyvalent",
+        "Robuste",
+        "Facile à installer",
+        "Applications industrielles"
+      ],
+      "limitations": [
+        "Taille moyenne",
+        "Courant limité"
+      ],
+      "categorie": "accessoires",
+      "stock": 5,
+      "nouveau": true
+    },
+    {
+      "id": "ic-ir2113",
+      "nom": "IC IR2113",
+      "nomComplet": "Driver MOSFET Haute/Lasse Tension IR2113",
+      "prix": 1200,
+      "devise": "FCFA",
+      "images": ["images/produits/ic-ir2113.jpg"],
+      "description": "Driver pour MOSFET et IGBT pour applications haute tension.",
+      "caracteristiques": [
+        "Tension haute: 600V",
+        "Tension logique: 5-20V",
+        "Courant pic: 2A",
+        "Temps propagation: 120ns",
+        "Protection dead-time"
+      ],
+      "avantages": [
+        "Haute tension",
+        "Rapide",
+        "Protections intégrées",
+        "Applications professionnelles"
+      ],
+      "limitations": [
+        "Complexe à utiliser",
+        "Sensible aux interférences"
+      ],
+      "categorie": "composants",
+      "stock": 5,
+      "nouveau": true
+    },
+    {
+      "id": "diode-in4xxx",
+      "nom": "Diode IN4xxx",
+      "nomComplet": "Diode de Puissance Série IN400x",
+      "prix": 50,
+      "devise": "FCFA",
+      "images": ["images/produits/diode-in4xxx.jpg"],
+      "description": "Diode de redressement standard pour circuits d'alimentation.",
+      "caracteristiques": [
+        "Série: IN4001 à IN4007",
+        "Tension inverse: 50-1000V",
+        "Courant: 1A",
+        "Type: Silicium",
+        "Boîtier: DO-41"
+      ],
+      "avantages": [
+        "Robuste",
+        "Prix bas",
+        "Polyvalente",
+        "Facile à trouver"
+      ],
+      "limitations": [
+        "Tension chute: 0.7V",
+        "Fréquence limitée"
+      ],
+      "categorie": "composants",
+      "stock": 1,
+      "nouveau": false
+    },
+    {
+      "id": "resistance",
+      "nom": "Résistance",
+      "nomComplet": "Lot de Résistances Carbone 1/4W",
+      "prix": 1000,
+      "devise": "FCFA",
+      "images": ["images/produits/resistance.jpg"],
+      "description": "Lot complet de résistances pour tous vos projets électroniques.",
+      "caracteristiques": [
+        "Valeurs: 10Ω à 1MΩ",
+        "Puissance: 1/4W",
+        "Tolérance: 5%",
+        "Type: Carbone",
+        "Lot de 500 pièces"
+      ],
+      "avantages": [
+        "Économique en lot",
+        "Toutes valeurs",
+        "Indispensable",
+        "Longue durée"
+      ],
+      "limitations": [
+        "Précision moyenne",
+        "Sensible à la chaleur"
+      ],
+      "categorie": "composants",
+      "stock": 1,
+      "nouveau": false
+    },
+    {
+      "id": "pedale",
+      "nom": "Pédale",
+      "nomComplet": "Pédale de Commande au Pied",
+      "prix": 2500,
+      "devise": "FCFA",
+      "images": ["images/produits/pedale.jpg"],
+      "description": "Pédale mécanique pour commande mains-libres d'appareils électriques.",
+      "caracteristiques": [
+        "Type: Momentary/Alternate",
+        "Tension: 250V AC",
+        "Courant: 10A",
+        "Câble: 1.5m",
+        "Matériau: Métal/Plastique"
+      ],
+      "avantages": [
+        "Commande mains-libres",
+        "Robuste",
+        "Applications musicales",
+        "Fiable"
+      ],
+      "limitations": [
+        "Usage spécifique",
+        "Encombrante"
+      ],
+      "categorie": "accessoires",
+      "stock": 1,
+      "nouveau": true
     }
   ]
 }
