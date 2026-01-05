@@ -1471,3 +1471,238 @@ textarea.form-control {
     justify-content: center;
   }
 }
+
+/* ===== BOUTON PANIER FLOTTANT ===== */
+.cart-float {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background-color: #f59e0b;
+  color: #1e293b;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: 3px solid white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cartFloatAppear 0.5s ease-out 0.3s forwards;
+}
+
+.cart-float:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+  background-color: #e69500;
+}
+
+.cart-float:active {
+  transform: scale(0.95) translateY(0);
+}
+
+/* Animation d'apparition */
+@keyframes cartFloatAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge compteur */
+.cart-float-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid white;
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+  animation: cartBadgePulse 2s infinite;
+  transition: all 0.3s;
+}
+
+/* Animation du badge */
+@keyframes cartBadgePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+  }
+}
+
+/* Cacher le badge quand panier vide */
+.cart-float-count:empty,
+.cart-float-count[data-count="0"] {
+  display: none !important;
+  animation: none;
+}
+
+/* Tooltip */
+.cart-float-tooltip {
+  position: fixed;
+  bottom: 170px;
+  right: 30px;
+  background: white;
+  color: #1e293b;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(10px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  white-space: nowrap;
+  border: 1px solid #e2e8f0;
+  max-width: 200px;
+  text-align: center;
+}
+
+/* Flèche du tooltip */
+.cart-float-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border-width: 8px 6px 0 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Afficher le tooltip au survol */
+.cart-float:hover ~ .cart-float-tooltip,
+.cart-float-tooltip:hover {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Animation de shake lors de l'ajout au panier */
+@keyframes cartFloatShake {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.1); }
+  50% { transform: rotate(10deg) scale(1.1); }
+  75% { transform: rotate(-5deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.cart-float.shaking {
+  animation: cartFloatShake 0.5s ease;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .cart-float {
+    bottom: 90px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+    border-width: 2px;
+  }
+  
+  .cart-float-count {
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    border-width: 2px;
+  }
+  
+  .cart-float-tooltip {
+    bottom: 150px;
+    right: 20px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    max-width: 160px;
+  }
+  
+  .cart-float-tooltip::after {
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-float {
+    bottom: 80px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .cart-float-count {
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+  }
+  
+  .cart-float-tooltip {
+    display: none; /* Cacher tooltip sur très petits écrans */
+  }
+}
+
+/* Support pour mode sombre */
+@media (prefers-color-scheme: dark) {
+  .cart-float-tooltip {
+    background: #1e293b;
+    color: white;
+    border-color: #334155;
+  }
+  
+  .cart-float-tooltip::after {
+    border-color: #1e293b transparent transparent transparent;
+  }
+}
+
+/* État chargement */
+.cart-float.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.cart-float.loading::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #1e293b;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
