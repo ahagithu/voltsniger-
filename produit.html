@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr" data-page="produit">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail Produit - VoltsNiger</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-detail-page {
+      padding: 40px 0;
+    }
+    
+    .product-detail-container {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    
+    .breadcrumb {
+      margin-bottom: 20px;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    
+    .breadcrumb a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .product-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 30px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .product-main {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .product-images {
+      position: sticky;
+      top: 20px;
+    }
+    
+    .main-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+      border: 2px solid #e2e8f0;
+      margin-bottom: 15px;
+    }
+    
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    
+    .thumbnail {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .thumbnail.active,
+    .thumbnail:hover {
+      border-color: #3b82f6;
+    }
+    
+    .product-info {
+      padding: 10px 0;
+    }
+    
+    .product-category {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .product-title {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    
+    .product-price {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    
+    .product-stock {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    .in-stock {
+      background: #dcfce7;
+      color: #059669;
+    }
+    
+    .out-of-stock {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
+    .product-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #475569;
+      margin: 25px 0;
+      padding: 20px 0;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+    
+    .specs-section {
+      margin: 30px 0;
+    }
+    
+    .specs-section h3 {
+      color: #1e293b;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .specs-list li {
+      padding: 10px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .specs-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .specs-list li i {
+      color: #3b82f6;
+      margin-top: 3px;
+    }
+    
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+    
+    .loading-state i {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .error-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #dc2626;
+    }
+    
+    .error-state i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    
+    .similar-products {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #e2e8f0;
+    }
+    
+    .similar-products h2 {
+      color: #1e293b;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+      </a>
+      
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="site-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="produits.html"><i class="fas fa-shopping-bag"></i> Produits</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="panier.html" class="cart-link">
+          <i class="fas fa-shopping-cart"></i> Panier
+          <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container product-detail-page">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a> > 
+      <a href="produits.html">Produits</a> > 
+      <span id="breadcrumb-product">Produit</span>
+    </div>
+    
+    <div class="product-detail-container">
+      <div id="product-content">
+        <div class="loading-state">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Chargement du produit...</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="similar-products">
+      <h2><i class="fas fa-random"></i> Produits similaires</h2>
+      <div id="similar-products" class="products-grid">
+        <!-- Les produits similaires seront chargés ici -->
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VoltsNiger</h4>
+          <p>Votre boutique électronique à Niamey depuis 2023.</p>
+          <div class="social">
+            <a href="https://wa.me/22793033158" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Liens</h4>
+          <a href="index.html">Accueil</a>
+          <a href="produits.html">Produits</a>
+          <a href="panier.html">Panier</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker"></i> Niamey, Niger</p>
+          <p><i class="fas fa-phone"></i> +227 93 03 31 58</p>
+          <p><i class="fas fa-phone"></i> +227 89 63 15 95</p>
+          <p><i class="fas fa-envelope"></i> voltsniger@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltsNiger. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+  <script>
+    // Variables
+    let detailProducts = [];
+    let currentProduct = null;
+    
+    // Fonction pour obtenir le nom de la catégorie
+    function getCategoryName(categoryId) {
+      const categories = {
+        'microcontroleurs': 'Microcontrôleurs',
+        'communication': 'Communication sans fil',
+        'capteurs': 'Capteurs',
+        'moteurs': 'Moteurs & Contrôle',
+        'alimentation': 'Alimentation',
+        'accessoires': 'Accessoires'
+      };
+      return categories[categoryId] || categoryId;
+    }
+    
+    // Charger les produits
+    async function loadDetailProducts() {
+      try {
+        const response = await fetch('produits.json');
+        const data = await response.json();
+        detailProducts = data.produits;
+        return detailProducts;
+      } catch (error) {
+        console.error('Erreur de chargement:', error);
+        return [];
+      }
+    }
+    
+    // Afficher le produit
+    function displayProduct(product) {
+      const container = document.getElementById('product-content');
+      
+      if (!product) {
+        container.innerHTML = `
+          <div class="error-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Produit non trouvé</h2>
+            <p>Le produit que vous recherchez n'existe pas ou a été supprimé.</p>
+            <a href="produits.html" class="btn btn-primary" style="margin-top: 20px;">
+              <i class="fas fa-arrow-left"></i> Retour aux produits
+            </a>
+          </div>
+        `;
+        return;
+      }
+      
+      currentProduct = product;
+      
+      // Mettre à jour le breadcrumb
+      document.getElementById('breadcrumb-product').textContent = product.nom;
+      
+      // Générer le HTML du produit
+      const stockText = product.stock > 0 ? 
+        `<div class="product-stock in-stock"><i class="fas fa-check"></i> ${product.stock} en stock</div>` :
+        `<div class="product-stock out-of-stock"><i class="fas fa-times"></i> Rupture de stock</div>`;
+      
+      const disabled = product.stock === 0 ? 'disabled' : '';
+      
+      container.innerHTML = `
+        <div class="product-main">
+          <div class="product-images">
+            <img src="${product.images[0]}" alt="${product.nom}" class="main-image" id="main-image">
+            
+            ${product.images.length > 1 ? `
+              <div class="thumbnail-grid">
+                ${product.images.map((img, index) => `
+                  <img src="${img}" alt="${product.nom} - vue ${index+1}" 
+                       class="thumbnail ${index === 0 ? 'active' : ''}"
+                       onclick="changeDetailImage('${img}', this)">
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          
+          <div class="product-info">
+            <span class="product-category">${getCategoryName(product.categorie)}</span>
+            <h1 class="product-title">${product.nomComplet || product.nom}</h1>
+            
+            <div class="product-price">${product.prix.toLocaleString()} ${product.devise}</div>
+            
+            ${stockText}
+            
+            <div class="product-description">${product.description}</div>
+            
+            <div class="product-actions">
+              <button class="btn btn-primary btn-lg" onclick="addToCartDetail('${product.id}')" ${disabled}>
+                <i class="fas fa-cart-plus"></i> Ajouter au panier
+              </button>
+              
+              <button class="btn btn-lg" style="background: #25D366; color: white;" 
+                      onclick="orderWhatsAppDetail('${product.id}')" ${disabled}>
+                <i class="fab fa-whatsapp"></i> Commander maintenant
+              </button>
+            </div>
+            
+            ${product.caracteristiques && product.caracteristiques.length > 0 ? `
+              <div class="specs-section">
+                <h3><i class="fas fa-list-check"></i> Caractéristiques techniques</h3>
+                <ul class="specs-list">
+                  ${product.caracteristiques.map(spec => `<li><i class="fas fa-check"></i> ${spec}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            
+            ${product.avantages && product.avantages.length > 0 ? `
+              <div class="specs-section">
+                <h3><i class="fas fa-thumbs-up"></i> Avantages</h3>
+                <ul class="specs-list">
+                  ${product.avantages.map(av => `<li><i class="fas fa-plus"></i> ${av}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            
+            ${product.limitations && product.limitations.length > 0 ? `
+              <div class="specs-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+                <ul class="specs-list">
+                  ${product.limitations.map(lim => `<li><i class="fas fa-minus"></i> ${lim}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      
+      // Afficher les produits similaires
+      displaySimilarProducts(product);
+    }
+    
+    // Afficher les produits similaires
+    function displaySimilarProducts(product) {
+      const container = document.getElementById('similar-products');
+      
+      if (!product || !detailProducts.length) return;
+      
+      // Trouver les produits similaires (même catégorie, exclure le produit actuel)
+      const similarProducts = detailProducts
+        .filter(p => p.id !== product.id && p.categorie === product.categorie)
+        .slice(0, 4);
+      
+      if (similarProducts.length === 0) {
+        container.innerHTML = '<p class="text-center">Aucun produit similaire trouvé.</p>';
+        return;
+      }
+      
+      container.innerHTML = similarProducts.map(p => `
+        <div class="product-card">
+          <img src="${p.images[0]}" alt="${p.nom}" class="product-image" loading="lazy">
+          <div class="product-info">
+            <span class="product-category">${getCategoryName(p.categorie)}</span>
+            <h3 class="product-title">${p.nom}</h3>
+            <p class="product-description">${p.description.substring(0, 80)}...</p>
+            <div class="product-price">${p.prix.toLocaleString()} ${p.devise}</div>
+            <div class="product-actions">
+              <button class="btn btn-primary btn-sm" onclick="addToCartDetail('${p.id}')">
+                <i class="fas fa-cart-plus"></i> Panier
+              </button>
+              <a href="produit.html?id=${p.id}" class="btn btn-details">
+                <i class="fas fa-eye"></i> Détails
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Changer l'image principale
+    function changeDetailImage(imgSrc, thumbnail) {
+      const mainImage = document.getElementById('main-image');
+      if (mainImage) {
+        mainImage.src = imgSrc;
+      }
+      
+      // Mettre à jour les miniatures actives
+      document.querySelectorAll('.thumbnail').forEach(t => {
+        t.classList.remove('active');
+      });
+      thumbnail.classList.add('active');
+    }
+    
+    // Ajouter au panier (version détail)
+    function addToCartDetail(productId) {
+      const product = currentProduct || detailProducts.find(p => p.id === productId);
+      
+      if (!product) {
+        alert('Produit non trouvé');
+        return;
+      }
+      
+      if (product.stock === 0) {
+        alert('Produit en rupture de stock');
+        return;
+      }
+      
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+      } else {
+        cart.push({
+          id: productId,
+          nom: product.nom,
+          prix: product.prix,
+          image: product.images[0],
+          quantity: 1
+        });
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Mettre à jour le compteur panier
+      updateCartCountDetail();
+      
+      // Notification
+      showDetailNotification(`${product.nom} ajouté au panier`);
+    }
+    
+    // Commander via WhatsApp (version détail)
+    function orderWhatsAppDetail(productId) {
+      const product = currentProduct || detailProducts.find(p => p.id === productId);
+      
+      if (!product) {
+        alert('Produit non trouvé');
+        return;
+      }
+      
+      if (product.stock === 0) {
+        alert('Produit en rupture de stock');
+        return;
+      }
+      
+      const phoneNumber = '22793033158';
+      const message = encodeURIComponent(
+        `Bonjour VoltsNiger,\n\nJe souhaite commander :\n` +
+        `Produit: ${product.nom}\n` +
+        `Prix: ${product.prix.toLocaleString()} ${product.devise}\n` +
+        `Quantité: 1\n\n` +
+        `Merci de me contacter pour finaliser la commande.`
+      );
+      
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+    
+    // Mettre à jour le compteur panier
+    function updateCartCountDetail() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      
+      document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = totalItems;
+        el.style.display = totalItems > 0 ? 'inline' : 'none';
+      });
+    }
+    
+    // Afficher une notification
+    function showDetailNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
+        <span>${message}</span>
+      `;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideIn 0.3s ease;
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+    
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Menu mobile
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener('click', () => {
+          siteNav.classList.toggle('active');
+        });
+      }
+      
+      // Mettre à jour le compteur panier
+      updateCartCountDetail();
+      
+      // Charger tous les produits
+      await loadDetailProducts();
+      
+      // Récupérer l'ID du produit depuis l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      
+      if (!productId) {
+        // Si pas d'ID, afficher une erreur
+        document.getElementById('product-content').innerHTML = `
+          <div class="error-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Produit non spécifié</h2>
+            <p>Veuillez sélectionner un produit depuis la page des produits.</p>
+            <a href="produits.html" class="btn btn-primary" style="margin-top: 20px;">
+              <i class="fas fa-shopping-bag"></i> Voir tous les produits
+            </a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Trouver le produit
+      const product = detailProducts.find(p => p.id === productId);
+      
+      if (!product) {
+        document.getElementById('product-content').innerHTML = `
+          <div class="error-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Produit non trouvé</h2>
+            <p>Le produit avec l'ID "${productId}" n'existe pas.</p>
+            <a href="produits.html" class="btn btn-primary" style="margin-top: 20px;">
+              <i class="fas fa-arrow-left"></i> Retour aux produits
+            </a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Afficher le produit
+      displayProduct(product);
+    });
+    
+    // Exposer les fonctions globalement
+    window.changeDetailImage = changeDetailImage;
+    window.addToCartDetail = addToCartDetail;
+    window.orderWhatsAppDetail = orderWhatsAppDetail;
+    
+    // Ajouter les animations CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
