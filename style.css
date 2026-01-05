@@ -1359,3 +1359,23 @@ textarea.form-control {
     gap: 30px;
   }
 }
+
+/* FORCE l'affichage mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .site-nav {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  .site-nav.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
