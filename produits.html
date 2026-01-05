@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr" data-page="produits">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tous les Produits - VoltsNiger</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header chargé dynamiquement -->
+  
+  <main class="container">
+    <h1 class="page-title"><i class="fas fa-shopping-bag"></i> Nos Produits</h1>
+    
+    <!-- Bannière WhatsApp -->
+    <div class="whatsapp-header">
+      <i class="fab fa-whatsapp fa-2x"></i>
+      <div>
+        <h3>Commande rapide via WhatsApp !</h3>
+        <p>Cliquez sur "Commander WhatsApp" sous chaque produit</p>
+      </div>
+    </div>
+    
+    <!-- Filtres -->
+    <div class="filters">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Rechercher un produit...">
+      </div>
+      
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">Tous</button>
+        <button class="filter-btn" data-category="microcontroleurs">Microcontrôleurs</button>
+        <button class="filter-btn" data-category="communication">Communication</button>
+        <button class="filter-btn" data-category="capteurs">Capteurs</button>
+        <button class="filter-btn" data-category="moteurs">Moteurs</button>
+        <button class="filter-btn" data-category="alimentation">Alimentation</button>
+        <button class="filter-btn" data-category="accessoires">Accessoires</button>
+      </div>
+    </div>
+    
+    <!-- Produits -->
+    <div id="products-container" class="products-grid">
+      <!-- Produits chargés dynamiquement -->
+    </div>
+    
+    <!-- Section admin (optionnelle, masquée par défaut) -->
+    <div class="admin-panel" style="display: none; margin-top: 40px; padding: 20px; background: #f8fafc; border-radius: 12px;">
+      <!-- Interface de gestion de stock -->
+    </div>
+  </main>
+  
+  <!-- Bouton WhatsApp flottant -->
+  <a href="https://wa.me/22793033158" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <!-- Footer chargé dynamiquement -->
+  
+  <!-- Charger les composants partagés -->
+  <script src="shared.html" type="text/html" id="shared-components"></script>
+  
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="stock-manager.js"></script>
+  <script>
+    // Activer le panel admin si nécessaire (supprimer en production)
+    // document.querySelector('.admin-panel').style.display = 'block';
+    // createStockManagerUI();
+  </script>
+</body>
+</html>
