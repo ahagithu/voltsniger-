@@ -1379,3 +1379,95 @@ textarea.form-control {
     opacity: 1 !important;
   }
 }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Bouton Panier spécial Hero */
+.btn-cart-hero {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: #f59e0b !important;
+  color: #1e293b !important;
+  padding: 15px 25px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  border: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 6px rgba(245, 158, 11, 0.2) !important;
+  position: relative !important;
+}
+
+.btn-cart-hero:hover {
+  background: #e69500 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(245, 158, 11, 0.3) !important;
+  border-color: #fbbf24 !important;
+}
+
+.btn-cart-hero:active {
+  transform: translateY(0) !important;
+}
+
+/* Badge sur le bouton */
+.cart-badge {
+  background: #ef4444 !important;
+  color: white !important;
+  font-size: 0.8rem !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 5px !important;
+  position: absolute !important;
+  top: -8px !important;
+  right: -8px !important;
+  font-weight: bold !important;
+  border: 2px solid #1e293b !important;
+  animation: pulse 2s infinite !important;
+}
+
+/* Animation du badge */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-cart-hero,
+  .btn-primary {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
