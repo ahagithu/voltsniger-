@@ -15,6 +15,46 @@ var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // ===== FONCTIONS DE BASE =====
 
+// Animation lors de l'ajout au panier
+function animateCartFloat() {
+  const cartFloat = document.querySelector('.cart-float');
+  if (cartFloat) {
+    cartFloat.classList.add('shaking');
+    setTimeout(() => {
+      cartFloat.classList.remove('shaking');
+    }, 500);
+  }
+}
+
+// Mise à jour du badge
+function updateCartFloatBadge() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  
+  const badge = document.querySelector('.cart-float-count');
+  if (badge) {
+    badge.textContent = totalItems;
+    badge.setAttribute('data-count', totalItems);
+    
+    // Mettre à jour le tooltip
+    const tooltip = document.querySelector('.cart-float-tooltip');
+    if (tooltip) {
+      if (totalItems === 0) {
+        tooltip.textContent = 'Panier vide';
+      } else if (totalItems === 1) {
+        tooltip.textContent = '1 article dans le panier';
+      } else {
+        tooltip.textContent = `${totalItems} articles dans le panier`;
+      }
+    }
+  }
+}
+
+// Initialiser
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartFloatBadge();
+});
+
 // ===== FONCTIONS PANIER =====
 
 // Mettre à jour TOUS les badges panier
