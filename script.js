@@ -52,46 +52,110 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== FONCTIONS PARTAGÉES =====
 
 // Charger les composants partagés
-function loadSharedComponents() {
-  // Charger le header
-  const headerTemplate = document.querySelector('#site-header');
-  if (headerTemplate) {
-    const header = headerTemplate.content.cloneNode(true);
-    document.body.insertBefore(header, document.body.firstChild);
-  }
-  
-  // Charger le footer
-  const footerTemplate = document.querySelector('#site-footer');
-  if (footerTemplate) {
-    const footer = footerTemplate.content.cloneNode(true);
-    document.body.appendChild(footer);
-  }
-  
-  // Mettre en surbrillance le lien actif
-  const activeNav = document.querySelector(`.nav-${currentPage}`);
-  if (activeNav) {
-    activeNav.classList.add('active');
-  }
-}
-
-// Menu mobile
-function initMobileMenu() {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const siteNav = document.querySelector('.site-nav');
-  
-  if (menuToggle && siteNav) {
-    menuToggle.addEventListener('click', () => {
-      siteNav.classList.toggle('active');
-    });
+// ===== CHARGEMENT DES COMPOSANTS PARTAGÉS =====
+async function loadSharedComponents() {
+  try {
+    // Charger le fichier shared.html
+    const response = await fetch('shared.html');
+    const html = await response.text();
     
-    siteNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        siteNav.classList.remove('active');
-      });
-    });
+    // Créer un élément temporaire pour parser le HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    // Extraire et insérer le header
+    const headerTemplate = tempDiv.querySelector('#site-header');
+    if (headerTemplate) {
+      const header = headerTemplate.content.cloneNode(true);
+      document.body.insertBefore(header, document.body.firstChild);
+    }
+    
+    // Extraire et insérer le footer
+    const footerTemplate = tempDiv.querySelector('#site-footer');
+    if (footerTemplate) {
+      const footer = footerTemplate.content.cloneNode(true);
+      document.body.appendChild(footer);
+    }
+    
+    // Mettre en surbrillance le lien actif dans le menu
+    const activeNav = document.querySelector(`.nav-${currentPage}`);
+    if (activeNav) {
+      activeNav.classList.add('active');
+    }
+    
+  } catch (error) {
+    console.error('Erreur de chargement des composants partagés:', error);
+    // Fallback: créer un header/footer basique
+    createFallbackComponents();
   }
 }
 
+// Fallback si le fichier shared.html n'est pas trouvé
+function createFallbackComponents() {
+  // Header fallback
+  const header = document.createElement('header');
+  header.className = 'site-header';
+  header.innerHTML = `
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+      </a>
+      
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="site-nav">
+        <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Accueil</a>
+        <a href="produits.html" class="nav-produits"><i class="fas fa-shopping-bag"></i> Produits</a>
+        <a href="contact.html" class="nav-contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="panier.html" class="cart-link nav-panier">
+          <i class="fas fa-shopping-cart"></i> Panier
+          <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  `;
+  document.body.insertBefore(header, document.body.firstChild);
+  
+  // Footer fallback
+  const footer = document.createElement('footer');
+  footer.className = 'site-footer';
+  footer.innerHTML = `
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VoltsNiger</h4>
+          <p>Votre boutique électronique à Niamey depuis 2023.</p>
+          <div class="social">
+            <a href="https://wa.me/22793033158" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Liens</h4>
+          <a href="index.html">Accueil</a>
+          <a href="produits.html">Produits</a>
+          <a href="panier.html">Panier</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker"></i> Niamey, Niger</p>
+          <p><i class="fas fa-phone"></i> +227 93 03 31 58</p>
+          <p><i class="fas fa-phone"></i> +227 89 63 15 95</p>
+          <p><i class="fas fa-envelope"></i> voltsniger@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltsNiger. Tous droits réservés.</p>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(footer);
+}
 // ===== GESTION DES PRODUITS =====
 
 // Charger tous les produits
