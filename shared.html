@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<!-- Ce fichier contient les éléments partagés -->
+<!-- HEADER -->
+<template id="site-header">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+      </a>
+      
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="site-nav">
+        <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Accueil</a>
+        <a href="produits.html" class="nav-produits"><i class="fas fa-shopping-bag"></i> Produits</a>
+        <a href="contact.html" class="nav-contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="panier.html" class="cart-link nav-panier">
+          <i class="fas fa-shopping-cart"></i> Panier
+          <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+</template>
+
+<!-- FOOTER -->
+<template id="site-footer">
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VoltsNiger</h4>
+          <p>Votre boutique électronique à Niamey depuis 2023.</p>
+          <div class="social">
+            <a href="https://wa.me/22793033158" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Liens</h4>
+          <a href="index.html">Accueil</a>
+          <a href="produits.html">Produits</a>
+          <a href="panier.html">Panier</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker"></i> Niamey, Niger</p>
+          <p><i class="fas fa-phone"></i> +227 93 03 31 58</p>
+          <p><i class="fas fa-phone"></i> +227 89 63 15 95</p>
+          <p><i class="fas fa-envelope"></i> voltsniger@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltsNiger. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<!-- TEMPLATE PRODUIT CARD -->
+<template id="product-card-template">
+  <div class="product-card" data-category="{category}">
+    <div class="product-badges">
+      {badges}
+    </div>
+    
+    <div class="whatsapp-badge">
+      <i class="fab fa-whatsapp"></i> Commande rapide
+    </div>
+    
+    <img src="{image}" alt="{name}" class="product-image" loading="lazy">
+    
+    <div class="product-info">
+      <span class="product-category">{categoryName}</span>
+      <h3 class="product-title">{name}</h3>
+      <p class="product-description">{description}</p>
+      
+      <div class="product-price">{price}</div>
+      
+      <div class="product-stock {stockClass}">
+        <i class="fas fa-{stockIcon}"></i> {stockText}
+      </div>
+      
+      <div class="product-actions">
+        <button class="btn btn-whatsapp-product" onclick="orderWhatsAppProduct('{id}')" {disabled}>
+          <i class="fab fa-whatsapp"></i> COMMANDER WHATSAPP
+        </button>
+        
+        <button class="btn btn-primary" onclick="addToCart('{id}')" {disabled}>
+          <i class="fas fa-cart-plus"></i> Panier
+        </button>
+        
+        <a href="produit.html?id={id}" class="btn btn-details">
+          <i class="fas fa-eye"></i> Détails
+        </a>
+      </div>
+      
+      <div class="quick-order-notice">
+        <i class="fas fa-bolt"></i> Livraison rapide sous 24h
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- MODAL DETAIL PRODUIT -->
+<template id="product-modal-template">
+  <div class="product-modal-overlay">
+    <div class="product-modal">
+      <button class="modal-close">&times;</button>
+      <div class="modal-content">
+        <!-- Contenu chargé dynamiquement -->
+      </div>
+    </div>
+  </div>
+</template>
+</html>
