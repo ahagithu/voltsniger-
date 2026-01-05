@@ -8,8 +8,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header sera chargé dynamiquement -->
-  
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>Volts<span style="color: #f59e0b;">Niger</span></span>
+      </a>
+      
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="site-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="produits.html" class="active"><i class="fas fa-shopping-bag"></i> Produits</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="panier.html" class="cart-link">
+          <i class="fas fa-shopping-cart"></i> Panier
+          <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
   <main class="container">
     <h1 class="page-title"><i class="fas fa-shopping-bag"></i> Nos Produits</h1>
     
@@ -39,7 +62,9 @@
     </div>
     
     <div id="products-container" class="products-grid">
-      <!-- Produits chargés dynamiquement -->
+      <div class="loading">
+        <i class="fas fa-spinner fa-spin"></i> Chargement des produits...
+      </div>
     </div>
     
     <!-- Bouton WhatsApp flottant -->
@@ -47,10 +72,66 @@
       <i class="fab fa-whatsapp"></i>
     </a>
   </main>
-  
-  <!-- Footer sera chargé dynamiquement -->
-  
-  <!-- Scripts -->
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VoltsNiger</h4>
+          <p>Votre boutique électronique à Niamey depuis 2023.</p>
+          <div class="social">
+            <a href="https://wa.me/22793033158" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Liens</h4>
+          <a href="index.html">Accueil</a>
+          <a href="produits.html">Produits</a>
+          <a href="panier.html">Panier</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker"></i> Niamey, Niger</p>
+          <p><i class="fas fa-phone"></i> +227 93 03 31 58</p>
+          <p><i class="fas fa-phone"></i> +227 89 63 15 95</p>
+          <p><i class="fas fa-envelope"></i> voltsniger@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltsNiger. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
   <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menu mobile
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      
+      if (menuToggle && siteNav) {
+        menuToggle.addEventListener('click', () => {
+          siteNav.classList.toggle('active');
+        });
+      }
+      
+      // Charger les produits
+      if (typeof loadProducts === 'function') {
+        loadProducts('products-container');
+        initFilters();
+      }
+      
+      // Mettre à jour le compteur panier
+      if (typeof updateCartCount === 'function') {
+        updateCartCount();
+      }
+    });
+  </script>
 </body>
 </html>
