@@ -1,0 +1,83 @@
+{
+  "override": true,
+  "stocks": [
+    {
+      "id": "esp32",
+      "quantity": 15,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 5,
+      "notes": "Produit très demandé, commander bientôt"
+    },
+    {
+      "id": "arduino-nano",
+      "quantity": 25,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 10,
+      "notes": "Stock correct"
+    },
+    {
+      "id": "nrf24l01",
+      "quantity": 18,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 8,
+      "notes": "Produit spécialisé"
+    },
+    {
+      "id": "l298n",
+      "quantity": 12,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 6,
+      "notes": "Commander avant rupture"
+    },
+    {
+      "id": "dht22",
+      "quantity": 30,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 15,
+      "notes": "Stock abondant"
+    },
+    {
+      "id": "relais-5v",
+      "quantity": 40,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 20,
+      "notes": "Stock maximal"
+    },
+    {
+      "id": "hc-sr04",
+      "quantity": 22,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 10,
+      "notes": "Stock moyen"
+    },
+    {
+      "id": "mpu6050",
+      "quantity": 8,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 4,
+      "notes": "Stock faible, commander urgemment"
+    },
+    {
+      "id": "alim-5v",
+      "quantity": 35,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 15,
+      "notes": "Stock bon"
+    },
+    {
+      "id": "breadboard",
+      "quantity": 50,
+      "lastUpdated": "2024-01-15",
+      "minimumStock": 25,
+      "notes": "Stock excellent"
+    }
+  ],
+  "settings": {
+    "autoReorder": false,
+    "lowStockAlert": true,
+    "alertThreshold": 10,
+    "currency": "FCFA",
+    "lastInventory": "2024-01-15",
+    "nextInventory": "2024-02-15"
+  }
+}
