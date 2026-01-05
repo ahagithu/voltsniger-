@@ -15,6 +15,60 @@ var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // ===== FONCTIONS DE BASE =====
 
+// ===== MENU MOBILE =====
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const siteNav = document.querySelector('.site-nav');
+  const body = document.body;
+  
+  if (menuToggle && siteNav) {
+    // Toggle menu
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation(); // Empêche la propagation
+      siteNav.classList.toggle('active');
+      body.classList.toggle('menu-open');
+      menuToggle.innerHTML = siteNav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Fermer le menu en cliquant sur un lien
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('active');
+        body.classList.remove('menu-open');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Fermer le menu en cliquant à l'extérieur
+    document.addEventListener('click', function(e) {
+      if (siteNav.classList.contains('active') && 
+          !siteNav.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        siteNav.classList.remove('active');
+        body.classList.remove('menu-open');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+    
+    // Fermer avec la touche ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && siteNav.classList.contains('active')) {
+        siteNav.classList.remove('active');
+        body.classList.remove('menu-open');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+  }
+}
+
+// ===== INITIALISATION =====
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileMenu();
+  // ... autres initialisations
+});
+
 // Mettre à jour le compteur panier
 function updateCartCount() {
   const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
