@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header chargé dynamiquement -->
+  <!-- Header sera chargé dynamiquement -->
   
   <main class="container">
     <h1 class="page-title"><i class="fas fa-shopping-bag"></i> Nos Produits</h1>
     
-    <!-- Bannière WhatsApp -->
     <div class="whatsapp-header">
       <i class="fab fa-whatsapp fa-2x"></i>
       <div>
@@ -22,7 +21,6 @@
       </div>
     </div>
     
-    <!-- Filtres -->
     <div class="filters">
       <div class="search-box">
         <i class="fas fa-search"></i>
@@ -40,34 +38,19 @@
       </div>
     </div>
     
-    <!-- Produits -->
     <div id="products-container" class="products-grid">
       <!-- Produits chargés dynamiquement -->
     </div>
     
-    <!-- Section admin (optionnelle, masquée par défaut) -->
-    <div class="admin-panel" style="display: none; margin-top: 40px; padding: 20px; background: #f8fafc; border-radius: 12px;">
-      <!-- Interface de gestion de stock -->
-    </div>
+    <!-- Bouton WhatsApp flottant -->
+    <a href="https://wa.me/22793033158" class="whatsapp-float" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
   </main>
   
-  <!-- Bouton WhatsApp flottant -->
-  <a href="https://wa.me/22793033158" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  
-  <!-- Footer chargé dynamiquement -->
-  
-  <!-- Charger les composants partagés -->
-  <script src="shared.html" type="text/html" id="shared-components"></script>
+  <!-- Footer sera chargé dynamiquement -->
   
   <!-- Scripts -->
   <script src="script.js"></script>
-  <script src="stock-manager.js"></script>
-  <script>
-    // Activer le panel admin si nécessaire (supprimer en production)
-    // document.querySelector('.admin-panel').style.display = 'block';
-    // createStockManagerUI();
-  </script>
 </body>
 </html>
